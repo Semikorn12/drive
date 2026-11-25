@@ -34,7 +34,16 @@ git --version
 4. Projekt holen und Abhängigkeiten installieren:
 
 ```powershell
-cd $HOME\Projekte\drive
+cd $HOME\Projekte
+git clone https://github.com/Semikorn12/drive.git
+cd drive
+npm install
+```
+
+Neuere Stände später holen:
+
+```powershell
+git pull
 npm install
 ```
 
