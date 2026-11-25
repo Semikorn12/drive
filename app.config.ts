@@ -15,7 +15,13 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: 'Dr!ve', // shown under the icon
   slug: 'drive', // technical name, no special characters
+  owner: 'semikorn12', // Expo account that owns the project
   scheme: 'drive',
+  extra: {
+    ...config.extra,
+    // Links this app to the Expo/EAS project (from `eas init`). Not a secret.
+    eas: { projectId: 'c2017742-9ae9-45a0-a9d3-b5aef9e047a8' },
+  },
   version: '0.1.0',
   orientation: 'portrait',
   icon: './assets/images/icon.png',
