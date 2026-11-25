@@ -1,0 +1,88 @@
+{
+  "common": {
+    "next": "Weiter",
+    "back": "Zurück",
+    "later": "Später",
+    "done": "Fertig",
+    "comingSoon": "Kommt bald"
+  },
+  "tabs": {
+    "week": "Woche",
+    "trips": "Fahrten",
+    "compare": "Vergleich",
+    "achievements": "Erfolge",
+    "settings": "Einstellungen"
+  },
+  "onboarding": {
+    "step": "Schritt {{current}} von {{total}}",
+    "language": {
+      "title": "Willkommen bei Dr!ve",
+      "subtitle": "Wähle deine Sprache. Du kannst sie später in den Einstellungen ändern."
+    },
+    "theme": {
+      "title": "Wähle dein Design",
+      "subtitle": "Dunkel wie ein Cockpit bei Nacht – oder hell für den Tag."
+    },
+    "account": {
+      "title": "Mit Freunden vergleichen",
+      "subtitle": "Mit einem Konto kannst du dich mit Freunden vergleichen. Deine Fahrten und Routen bleiben immer nur auf deinem Handy.",
+      "create": "Konto erstellen",
+      "skip": "Später, erst mal losfahren"
+    },
+    "finish": {
+      "title": "Alles bereit",
+      "subtitle": "Im nächsten Schritt erklären wir dir, welche Berechtigungen Dr!ve braucht, damit Fahrten automatisch aufgezeichnet werden.",
+      "start": "Los geht's"
+    }
+  },
+  "theme": {
+    "dark": "Dunkel",
+    "light": "Hell"
+  },
+  "language": {
+    "de": "Deutsch",
+    "en": "English"
+  },
+  "units": {
+    "kmh": "km/h",
+    "mph": "mph"
+  },
+  "week": {
+    "title": "Diese Woche",
+    "distance": "Kilometer",
+    "trips": "Fahrten",
+    "duration": "Fahrzeit",
+    "streak": "Serie",
+    "emptyTitle": "Noch keine Fahrten",
+    "emptyText": "Sobald du fährst, zeichnet Dr!ve deine Fahrt automatisch auf."
+  },
+  "trips": {
+    "title": "Fahrten",
+    "empty": "Hier erscheinen deine Fahrten, neueste zuerst."
+  },
+  "compare": {
+    "title": "Vergleich",
+    "text": "Lade Freunde per Code oder Link ein und vergleicht eure Woche – nach Kilometern, Fahrten und Serie."
+  },
+  "achievements": {
+    "title": "Erfolge",
+    "text": "Schalte Abzeichen frei – für Strecke, Serien und besondere Fahrten. Nie für hohes Tempo."
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "language": "Sprache",
+    "theme": "Design",
+    "units": "Einheiten",
+    "account": "Konto",
+    "export": "Daten exportieren (CSV)",
+    "deleteData": "Daten löschen",
+    "privacy": "Datenschutz",
+    "privacyText": "Fahrten, Routen und GPS-Punkte bleiben nur auf deinem Handy.",
+    "version": "Version {{version}}",
+    "replayOnboarding": "Onboarding erneut zeigen"
+  },
+  "intro": {
+    "skipHint": "Antippen zum Überspringen",
+    "logoLabel": "Dr!ve"
+  }
+}

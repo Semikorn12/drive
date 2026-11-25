@@ -1,0 +1,88 @@
+{
+  "common": {
+    "next": "Next",
+    "back": "Back",
+    "later": "Later",
+    "done": "Done",
+    "comingSoon": "Coming soon"
+  },
+  "tabs": {
+    "week": "Week",
+    "trips": "Trips",
+    "compare": "Compare",
+    "achievements": "Badges",
+    "settings": "Settings"
+  },
+  "onboarding": {
+    "step": "Step {{current}} of {{total}}",
+    "language": {
+      "title": "Welcome to Dr!ve",
+      "subtitle": "Choose your language. You can change it later in Settings."
+    },
+    "theme": {
+      "title": "Choose your look",
+      "subtitle": "Dark like a cockpit at night – or light for the day."
+    },
+    "account": {
+      "title": "Compare with friends",
+      "subtitle": "With an account you can compare with friends. Your trips and routes always stay on your phone only.",
+      "create": "Create account",
+      "skip": "Later, let's drive first"
+    },
+    "finish": {
+      "title": "All set",
+      "subtitle": "Next, we'll explain which permissions Dr!ve needs to record your trips automatically.",
+      "start": "Let's go"
+    }
+  },
+  "theme": {
+    "dark": "Dark",
+    "light": "Light"
+  },
+  "language": {
+    "de": "Deutsch",
+    "en": "English"
+  },
+  "units": {
+    "kmh": "km/h",
+    "mph": "mph"
+  },
+  "week": {
+    "title": "This week",
+    "distance": "Kilometres",
+    "trips": "Trips",
+    "duration": "Driving time",
+    "streak": "Streak",
+    "emptyTitle": "No trips yet",
+    "emptyText": "As soon as you drive, Dr!ve records your trip automatically."
+  },
+  "trips": {
+    "title": "Trips",
+    "empty": "Your trips will appear here, newest first."
+  },
+  "compare": {
+    "title": "Compare",
+    "text": "Invite friends with a code or link and compare your week – by distance, trips and streak."
+  },
+  "achievements": {
+    "title": "Badges",
+    "text": "Unlock badges for distance, streaks and special trips. Never for high speed."
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Appearance",
+    "units": "Units",
+    "account": "Account",
+    "export": "Export data (CSV)",
+    "deleteData": "Delete data",
+    "privacy": "Privacy",
+    "privacyText": "Trips, routes and GPS points stay on your phone only.",
+    "version": "Version {{version}}",
+    "replayOnboarding": "Show onboarding again"
+  },
+  "intro": {
+    "skipHint": "Tap to skip",
+    "logoLabel": "Dr!ve"
+  }
+}
