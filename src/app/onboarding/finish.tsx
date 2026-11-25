@@ -5,15 +5,14 @@ import { Button } from '../../components/ui/Button';
 import { useSettings } from '../../state/settingsStore';
 
 /**
- * Last step. In phase 2 the permission explainer screens (location "Always",
- * motion & fitness, notifications) are inserted before this one.
+ * Last step (after the permission explainers).
  */
 export default function FinishStep() {
   const { t } = useTranslation();
   const complete = useSettings((s) => s.completeOnboarding);
   return (
     <OnboardingStep
-      step={4}
+      step={7}
       total={ONBOARDING_STEPS}
       title={t('onboarding.finish.title')}
       subtitle={t('onboarding.finish.subtitle')}

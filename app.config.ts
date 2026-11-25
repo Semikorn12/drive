@@ -1,12 +1,15 @@
 import type { ConfigContext, ExpoConfig } from 'expo/config';
 
 /**
- * ⚠️ Change this ONCE to your own reverse-domain id before the first build
- * (letters, digits and dots only – no "!"). Example: com.maxmustermann.drive
+ * Reverse-domain app id (letters, digits and dots only – no "!").
+ * Do not change it after the app is in the App Store.
  */
-const BUNDLE_ID = 'com.meinname.drive';
+const BUNDLE_ID = 'com.semion.drive';
 
 const SPLASH_BG = '#070F2B';
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const EN = require('./locales/ios/en.json').ios as Record<string, string>;
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
@@ -24,10 +27,17 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     buildNumber: '1',
     infoPlist: {
       ITSAppUsesNonExemptEncryption: false,
+      CFBundleAllowMixedLocalizations: true,
     },
+  },
+  // Localised app name + permission texts for iOS (English is the base text in the plugins below).
+  locales: {
+    de: './locales/ios/de.json',
+    en: './locales/ios/en.json',
   },
   android: {
     package: BUNDLE_ID,
+    permissions: ['ACTIVITY_RECOGNITION'],
     versionCode: 1,
     adaptiveIcon: {
       backgroundColor: SPLASH_BG,
@@ -48,8 +58,22 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         imageWidth: 1,
       },
     ],
-    'expo-localization',
+    ['expo-localization', { supportedLocales: { ios: ['de', 'en'], android: ['de', 'en'] } }],
     'expo-font',
+    [
+      'expo-location',
+      {
+        locationWhenInUsePermission: EN.NSLocationWhenInUseUsageDescription,
+        locationAlwaysAndWhenInUsePermission: EN.NSLocationAlwaysAndWhenInUseUsageDescription,
+        motionUsagePermission: EN.NSMotionUsageDescription,
+        isIosBackgroundLocationEnabled: true,
+        isAndroidBackgroundLocationEnabled: true,
+        isAndroidForegroundServiceEnabled: true,
+      },
+    ],
+    'expo-sqlite',
+    ['expo-notifications', { color: '#FF8A2A' }],
+    'expo-document-picker',
   ],
   experiments: {
     typedRoutes: true,

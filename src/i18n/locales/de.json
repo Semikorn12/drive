@@ -31,8 +31,35 @@
     },
     "finish": {
       "title": "Alles bereit",
-      "subtitle": "Im nächsten Schritt erklären wir dir, welche Berechtigungen Dr!ve braucht, damit Fahrten automatisch aufgezeichnet werden.",
+      "subtitle": "Fahr einfach los. Dr!ve erkennt deine Fahrt automatisch – danach findest du sie unter „Fahrten“.",
       "start": "Los geht's"
+    },
+    "perm": {
+      "allow": "Erlauben",
+      "notNow": "Nicht jetzt",
+      "openSettings": "Einstellungen öffnen",
+      "granted": "Erlaubt ✓",
+      "denied": "Nicht erlaubt. Du kannst das jederzeit in den iPhone-Einstellungen ändern.",
+      "location": {
+        "title": "Standort: „Immer“",
+        "subtitle": "Damit Dr!ve deine Fahrten automatisch erkennt – auch wenn die App geschlossen ist – braucht sie deinen Standort im Hintergrund.",
+        "b1": "Akku-schonend: Im Stand merkt sich Dr!ve nur grob, wo du geparkt hast. Genaues GPS läuft nur während einer Fahrt.",
+        "b2": "Privat: Deine Fahrten, Routen und Orte bleiben nur auf deinem iPhone und werden nie hochgeladen.",
+        "b3": "iOS fragt zuerst „Beim Verwenden der App“. Etwas später fragt iOS, ob Dr!ve den Standort „Immer“ nutzen darf – wähle dann bitte „Immer erlauben“.",
+        "limited": "Du hast „Beim Verwenden der App“ erlaubt. Für die automatische Erkennung braucht Dr!ve „Immer“. Ohne das kannst du Fahrten nur per Knopf aufzeichnen, solange die App offen ist."
+      },
+      "motion": {
+        "title": "Bewegung & Fitness",
+        "subtitle": "Dein iPhone erkennt mit seinen Sensoren, ob du gehst, Rad fährst oder im Auto sitzt. Dr!ve nutzt das, damit GPS nur bei echten Autofahrten läuft.",
+        "b1": "Spart Akku und verhindert, dass Radtouren als Autofahrt zählen.",
+        "b2": "Dr!ve liest keine Gesundheitsdaten, keine Schritte und keine Trainings."
+      },
+      "notifications": {
+        "title": "Mitteilungen",
+        "subtitle": "Dr!ve schickt dir sonntags um 18 Uhr deinen Wochenrückblick und sagt Bescheid, wenn du einen Erfolg freischaltest oder ein Freund dich überholt.",
+        "b1": "Während der Fahrt schickt Dr!ve nie Mitteilungen.",
+        "b2": "Keine Werbung per Mitteilung."
+      }
     }
   },
   "theme": {
@@ -75,14 +102,82 @@
     "units": "Einheiten",
     "account": "Konto",
     "export": "Daten exportieren (CSV)",
-    "deleteData": "Daten löschen",
+    "deleteData": "Alle Fahrten löschen",
     "privacy": "Datenschutz",
     "privacyText": "Fahrten, Routen und GPS-Punkte bleiben nur auf deinem Handy.",
     "version": "Version {{version}}",
-    "replayOnboarding": "Onboarding erneut zeigen"
+    "replayOnboarding": "Onboarding erneut zeigen",
+    "deleteConfirmTitle": "Alle Fahrten löschen?",
+    "deleteConfirmText": "Alle Fahrten, Routen und Protokolle auf diesem iPhone werden gelöscht. Das kann nicht rückgängig gemacht werden.",
+    "deleteConfirm": "Löschen",
+    "cancel": "Abbrechen",
+    "deleted": "Gelöscht",
+    "diagnosticsUnlocked": "Diagnose freigeschaltet"
   },
   "intro": {
     "skipHint": "Antippen zum Überspringen",
     "logoLabel": "Dr!ve"
+  },
+  "tracking": {
+    "androidNotificationTitle": "Dr!ve zeichnet auf",
+    "androidNotificationBody": "Deine Fahrt wird erkannt und gespeichert.",
+    "statusIdle": "Automatische Erkennung aktiv",
+    "statusCandidate": "Bewegung erkannt – prüfe, ob du fährst …",
+    "statusDriving": "Fahrt wird aufgezeichnet",
+    "statusOff": "Automatische Erkennung aus",
+    "statusOffHint": "Erlaube den Standort „Immer“, damit Fahrten automatisch erkannt werden.",
+    "manualStart": "Fahrt starten",
+    "manualStop": "Fahrt beenden",
+    "manualHint": "Falls die automatische Erkennung eine Fahrt verpasst: hier von Hand starten. Dr!ve beendet sie automatisch nach 3 Minuten Stillstand.",
+    "simulationBadge": "Simulation läuft"
+  },
+  "diagnostics": {
+    "title": "Diagnose",
+    "status": "Status",
+    "phase": "Phase",
+    "phases": {
+      "idle": "Ruhe (Geofence)",
+      "candidate": "Prüfen (GPS kurz an)",
+      "driving": "Fahrt (GPS genau)"
+    },
+    "lastFix": "Letzter GPS-Punkt",
+    "accuracy": "Genauigkeit",
+    "speed": "Tempo",
+    "preciseActive": "Genaues GPS aktiv",
+    "geofenceActive": "Geofence aktiv",
+    "yes": "ja",
+    "no": "nein",
+    "never": "nie",
+    "permissions": "Berechtigungen",
+    "permLocationFg": "Standort (beim Verwenden)",
+    "permLocationBg": "Standort (immer)",
+    "permMotion": "Bewegung & Fitness",
+    "permNotifications": "Mitteilungen",
+    "permPrecise": "Genauer Standort",
+    "simulation": "Simulation",
+    "simulationHint": "Spielt eine Fahrt durch die echte Erkennung. Gespeicherte Fahrten sind als Simulation markiert.",
+    "instant": "Sofort",
+    "play": "Abspielen",
+    "stop": "Stopp",
+    "pickGpx": "Eigene GPX-Datei …",
+    "gpxError": "Die Datei konnte nicht gelesen werden.",
+    "samples": {
+      "cityDrive": "Stadtfahrt ~9 km",
+      "shortHop": "Kurzstrecke < 500 m (wird verworfen)",
+      "walk": "Spaziergang (keine Fahrt)",
+      "bike": "Radtour (keine Fahrt)",
+      "tunnel": "Autobahn mit Tunnel"
+    },
+    "result": "Ergebnis",
+    "resultSaved": "Fahrt gespeichert",
+    "resultDiscarded": "Fahrt verworfen",
+    "resultNone": "Keine Fahrt erkannt",
+    "log": "Protokoll",
+    "share": "Teilen",
+    "clear": "Leeren",
+    "refresh": "Aktualisieren",
+    "empty": "Noch keine Einträge.",
+    "trips": "Gespeicherte Fahrten",
+    "battery": "Akku"
   }
 }

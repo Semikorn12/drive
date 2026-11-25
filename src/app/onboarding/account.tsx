@@ -16,7 +16,7 @@ export default function AccountStep() {
       footer={
         <>
           <Button label={`${t('onboarding.account.create')} · ${t('common.comingSoon')}`} onPress={() => {}} disabled />
-          <Button label={t('onboarding.account.skip')} variant="ghost" onPress={() => router.push('/onboarding/finish')} />
+          <Button label={t('onboarding.account.skip')} variant="ghost" onPress={() => router.push('/onboarding/location')} />
         </>
       }
     />

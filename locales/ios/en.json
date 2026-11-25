@@ -1,0 +1,8 @@
+{
+  "ios": {
+    "CFBundleDisplayName": "Dr!ve",
+    "NSLocationWhenInUseUsageDescription": "Dr!ve uses your location to record your car trips (distance, duration, speed and route). Your trips stay on your iPhone.",
+    "NSLocationAlwaysAndWhenInUseUsageDescription": "Dr!ve uses your location in the background to detect and record car trips automatically, even when the app is closed. Trips and routes stay on your iPhone and are never uploaded.",
+    "NSMotionUsageDescription": "Dr!ve uses Motion & Fitness to recognise when you are in a car, so GPS only runs on real trips and saves battery. No health data is read."
+  }
+}

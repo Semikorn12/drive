@@ -1,0 +1,8 @@
+{
+  "ios": {
+    "CFBundleDisplayName": "Dr!ve",
+    "NSLocationWhenInUseUsageDescription": "Dr!ve nutzt deinen Standort, um deine Autofahrten aufzuzeichnen (Strecke, Dauer, Tempo und Route). Deine Fahrten bleiben auf deinem iPhone.",
+    "NSLocationAlwaysAndWhenInUseUsageDescription": "Dr!ve nutzt deinen Standort auch im Hintergrund, um Autofahrten automatisch zu erkennen und aufzuzeichnen, wenn die App geschlossen ist. Fahrten und Routen bleiben auf deinem iPhone und werden nie hochgeladen.",
+    "NSMotionUsageDescription": "Dr!ve nutzt Bewegung & Fitness, um zu erkennen, ob du im Auto sitzt. So läuft GPS nur bei echten Fahrten und spart Akku. Es werden keine Gesundheitsdaten gelesen."
+  }
+}

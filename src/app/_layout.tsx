@@ -1,4 +1,6 @@
 import '../i18n';
+// Background tasks must be registered at module scope, before anything renders.
+import '../services/tracking/tasks';
 
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -8,6 +10,7 @@ import { View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { IntroAnimation } from '../components/brand/IntroAnimation';
+import { useTrackingLifecycle } from '../hooks/useTrackingLifecycle';
 import { useSettings } from '../state/settingsStore';
 import { useTheme } from '../theme';
 
@@ -24,6 +27,7 @@ export default function RootLayout() {
   const onboardingDone = useSettings((s) => s.onboardingDone);
   const t = useTheme();
   const [showIntro, setShowIntro] = useState(!introPlayedThisProcess);
+  useTrackingLifecycle(hydrated && onboardingDone);
 
   return (
     <SafeAreaProvider>
@@ -37,6 +41,9 @@ export default function RootLayout() {
             </Stack.Protected>
             <Stack.Protected guard={onboardingDone}>
               <Stack.Screen name="(tabs)" />
+              <Stack.Screen name="diagnostics" options={{ presentation: 'card' }} />
+              <Stack.Screen name="trip/start" />
+              <Stack.Screen name="trip/stop" />
             </Stack.Protected>
           </Stack>
         ) : null}

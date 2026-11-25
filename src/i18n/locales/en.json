@@ -31,8 +31,35 @@
     },
     "finish": {
       "title": "All set",
-      "subtitle": "Next, we'll explain which permissions Dr!ve needs to record your trips automatically.",
+      "subtitle": "Just drive. Dr!ve detects your trip automatically – afterwards you'll find it under “Trips”.",
       "start": "Let's go"
+    },
+    "perm": {
+      "allow": "Allow",
+      "notNow": "Not now",
+      "openSettings": "Open Settings",
+      "granted": "Allowed ✓",
+      "denied": "Not allowed. You can change this any time in the iPhone Settings.",
+      "location": {
+        "title": "Location: “Always”",
+        "subtitle": "To detect your trips automatically – even when the app is closed – Dr!ve needs your location in the background.",
+        "b1": "Battery-friendly: while parked, Dr!ve only remembers roughly where you are. Precise GPS runs only during a trip.",
+        "b2": "Private: your trips, routes and places stay on your iPhone only and are never uploaded.",
+        "b3": "iOS first asks for “While Using the App”. A bit later iOS asks whether Dr!ve may use your location “Always” – please choose “Change to Always Allow”.",
+        "limited": "You allowed “While Using the App”. Automatic detection needs “Always”. Without it you can only record trips with the button while the app is open."
+      },
+      "motion": {
+        "title": "Motion & Fitness",
+        "subtitle": "Your iPhone's sensors can tell whether you are walking, cycling or in a car. Dr!ve uses this so GPS only runs on real car trips.",
+        "b1": "Saves battery and keeps bike rides from counting as car trips.",
+        "b2": "Dr!ve does not read health data, steps or workouts."
+      },
+      "notifications": {
+        "title": "Notifications",
+        "subtitle": "Dr!ve sends your weekly recap on Sundays at 6 pm and tells you when you unlock a badge or a friend overtakes you.",
+        "b1": "Dr!ve never sends notifications while you drive.",
+        "b2": "No advertising notifications."
+      }
     }
   },
   "theme": {
@@ -75,14 +102,82 @@
     "units": "Units",
     "account": "Account",
     "export": "Export data (CSV)",
-    "deleteData": "Delete data",
+    "deleteData": "Delete all trips",
     "privacy": "Privacy",
     "privacyText": "Trips, routes and GPS points stay on your phone only.",
     "version": "Version {{version}}",
-    "replayOnboarding": "Show onboarding again"
+    "replayOnboarding": "Show onboarding again",
+    "deleteConfirmTitle": "Delete all trips?",
+    "deleteConfirmText": "All trips, routes and logs on this iPhone will be deleted. This cannot be undone.",
+    "deleteConfirm": "Delete",
+    "cancel": "Cancel",
+    "deleted": "Deleted",
+    "diagnosticsUnlocked": "Diagnostics unlocked"
   },
   "intro": {
     "skipHint": "Tap to skip",
     "logoLabel": "Dr!ve"
+  },
+  "tracking": {
+    "androidNotificationTitle": "Dr!ve is recording",
+    "androidNotificationBody": "Your trip is being detected and saved.",
+    "statusIdle": "Automatic detection on",
+    "statusCandidate": "Movement detected – checking whether you're driving …",
+    "statusDriving": "Recording trip",
+    "statusOff": "Automatic detection off",
+    "statusOffHint": "Allow location “Always” so trips are detected automatically.",
+    "manualStart": "Start trip",
+    "manualStop": "End trip",
+    "manualHint": "If automatic detection misses a trip, start it here by hand. Dr!ve ends it automatically after 3 minutes standing still.",
+    "simulationBadge": "Simulation running"
+  },
+  "diagnostics": {
+    "title": "Diagnostics",
+    "status": "Status",
+    "phase": "Phase",
+    "phases": {
+      "idle": "Idle (geofence)",
+      "candidate": "Checking (GPS briefly on)",
+      "driving": "Trip (precise GPS)"
+    },
+    "lastFix": "Last GPS fix",
+    "accuracy": "Accuracy",
+    "speed": "Speed",
+    "preciseActive": "Precise GPS active",
+    "geofenceActive": "Geofence active",
+    "yes": "yes",
+    "no": "no",
+    "never": "never",
+    "permissions": "Permissions",
+    "permLocationFg": "Location (while using)",
+    "permLocationBg": "Location (always)",
+    "permMotion": "Motion & Fitness",
+    "permNotifications": "Notifications",
+    "permPrecise": "Precise location",
+    "simulation": "Simulation",
+    "simulationHint": "Plays a trip through the real detection. Saved trips are marked as simulation.",
+    "instant": "Instant",
+    "play": "Play",
+    "stop": "Stop",
+    "pickGpx": "Own GPX file …",
+    "gpxError": "The file could not be read.",
+    "samples": {
+      "cityDrive": "City drive ~9 km",
+      "shortHop": "Short hop < 500 m (discarded)",
+      "walk": "Walk (no trip)",
+      "bike": "Bike ride (no trip)",
+      "tunnel": "Motorway with tunnel"
+    },
+    "result": "Result",
+    "resultSaved": "Trip saved",
+    "resultDiscarded": "Trip discarded",
+    "resultNone": "No trip detected",
+    "log": "Log",
+    "share": "Share",
+    "clear": "Clear",
+    "refresh": "Refresh",
+    "empty": "No entries yet.",
+    "trips": "Saved trips",
+    "battery": "Battery"
   }
 }

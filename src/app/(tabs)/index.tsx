@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
+import { TrackingCard } from '../../components/TrackingCard';
 import { Card } from '../../components/ui/Card';
 import { Screen } from '../../components/ui/Screen';
 import { Body, Label, Title } from '../../components/ui/Typography';
@@ -18,6 +19,7 @@ export default function WeekScreen() {
   ];
   return (
     <Screen title={t('week.title')}>
+      <TrackingCard />
       <View style={styles.grid}>
         {stats.map((s) => (
           <Card key={s.key} decoId={`week-${s.key}`} style={styles.tile}>
