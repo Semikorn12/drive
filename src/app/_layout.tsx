@@ -5,13 +5,14 @@ import '../services/tracking/tasks';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { IntroAnimation } from '../components/brand/IntroAnimation';
 import { applyLanguage } from '../i18n';
 import { useTrackingLifecycle } from '../hooks/useTrackingLifecycle';
+import { startWebUpdateChecks } from '../services/webUpdate';
 import { useSettings } from '../state/settingsStore';
 import { useTheme } from '../theme';
 
@@ -32,6 +33,8 @@ export default function RootLayout() {
   const t = useTheme();
   const [showIntro, setShowIntro] = useState(!introPlayedThisProcess);
   useTrackingLifecycle(hydrated && onboardingDone);
+  // Browser version: load a newer deploy instead of a cached old one.
+  useEffect(() => startWebUpdateChecks(), []);
 
   return (
     <SafeAreaProvider>
