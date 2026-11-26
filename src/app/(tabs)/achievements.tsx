@@ -1,16 +1,13 @@
 import { useTranslation } from 'react-i18next';
 
-import { Card } from '../../components/ui/Card';
+import { EmptyState } from '../../components/ui/EmptyState';
 import { Screen } from '../../components/ui/Screen';
-import { Body } from '../../components/ui/Typography';
 
 export default function AchievementsScreen() {
   const { t } = useTranslation();
   return (
     <Screen title={t('achievements.title')}>
-      <Card decoId="achievements">
-        <Body muted>{t('achievements.text')}</Body>
-      </Card>
+      <EmptyState icon="trophy" title={t('empty.achTitle')} text={t('empty.achText')} />
     </Screen>
   );
 }

@@ -23,8 +23,14 @@ export const palette = {
   orange600: '#E8741A',
   orange100: '#FFE7D3',
 
+  // Dark surfaces (slightly lifted from the background)
+  navySurface: '#0D1634',
+  navySurface2: '#141F45',
+  ink: '#0B1430',
+
   // Neutrals
   white: '#FFFFFF',
+  snow: '#F4F6FB',
   gray100: '#E9ECF4',
   gray300: '#B5BCD3',
   gray500: '#7A84A6',
@@ -50,19 +56,35 @@ export const spacing = {
 export const radius = {
   sm: 8,
   md: 12,
-  lg: 18,
-  xl: 24,
+  lg: 16,
+  xl: 22,
   pill: 999,
 } as const;
 
 export const fontSize = {
+  overline: 11,
   caption: 12,
-  small: 14,
-  body: 16,
-  title: 20,
-  headline: 26,
-  display: 40,
-  gauge: 72,
+  small: 13,
+  body: 15,
+  heading: 17,
+  title: 22,
+  headline: 32,
+  display: 56,
+  hero: 72,
+  gauge: 96,
+} as const;
+
+/**
+ * Font families (loaded in src/app/_layout.tsx).
+ * Inter for UI text, Barlow Semi Condensed for numbers and headlines (instrument-cluster look).
+ * With custom fonts, pick the weight via the family – don't combine with fontWeight.
+ */
+export const fonts = {
+  regular: 'Inter_400Regular',
+  medium: 'Inter_500Medium',
+  semibold: 'Inter_600SemiBold',
+  display: 'BarlowSemiCondensed_600SemiBold',
+  displayBold: 'BarlowSemiCondensed_700Bold',
 } as const;
 
 export const fontWeight = {

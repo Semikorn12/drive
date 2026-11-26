@@ -2,26 +2,31 @@ import type { ReactNode } from 'react';
 import { StyleSheet, View, type ViewStyle } from 'react-native';
 
 import { useTheme } from '../../theme';
-import { DecoCurves } from './DecoCurves';
 
 interface Props {
   children: ReactNode;
-  /** Pass an id to show the decorative purple curves. */
+  /** Kept for compatibility – cards no longer draw decoration. */
   decoId?: string;
-  style?: ViewStyle;
+  style?: ViewStyle | ViewStyle[];
+  padded?: boolean;
 }
 
-export function Card({ children, decoId, style }: Props) {
+/** Calm surface: no borders in dark mode, a hairline in light mode. */
+export function Card({ children, style, padded = true }: Props) {
   const t = useTheme();
   return (
     <View
       style={[
         styles.card,
-        { backgroundColor: t.colors.surface, borderColor: t.colors.border, borderRadius: t.radius.lg, padding: t.spacing.lg },
-        style,
+        {
+          backgroundColor: t.colors.surface,
+          borderRadius: t.radius.xl,
+          padding: padded ? t.spacing.lg + 2 : 0,
+          borderColor: t.colors.border,
+        },
+        style as ViewStyle,
       ]}
     >
-      {decoId ? <DecoCurves id={decoId} /> : null}
       {children}
     </View>
   );

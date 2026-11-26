@@ -88,7 +88,13 @@
     "duration": "Driving time",
     "streak": "Streak",
     "emptyTitle": "No trips yet",
-    "emptyText": "As soon as you drive, Dr!ve records your trip automatically."
+    "emptyText": "As soon as you drive, Dr!ve records your trip automatically.",
+    "distanceLabel": "Distance",
+    "days": "days",
+    "vsLastWeek": "{{value}} vs. last week",
+    "firstWeek": "Comparison with last week starts next week",
+    "lastTrip": "Last trip",
+    "noTrips": "No trips yet – just drive."
   },
   "trips": {
     "title": "Trips",
@@ -119,7 +125,10 @@
     "deleteConfirm": "Delete",
     "cancel": "Cancel",
     "deleted": "Deleted",
-    "diagnosticsUnlocked": "Diagnostics unlocked"
+    "diagnosticsUnlocked": "Diagnostics unlocked",
+    "general": "General",
+    "data": "Data",
+    "about": "About Dr!ve"
   },
   "intro": {
     "skipHint": "Tap to skip",
@@ -128,15 +137,17 @@
   "tracking": {
     "androidNotificationTitle": "Dr!ve is recording",
     "androidNotificationBody": "Your trip is being detected and saved.",
-    "statusIdle": "Automatic detection on",
-    "statusCandidate": "Movement detected – checking whether you're driving …",
-    "statusDriving": "Recording trip",
-    "statusOff": "Automatic detection off",
+    "statusIdle": "Automatic",
+    "statusCandidate": "Movement detected …",
+    "statusDriving": "Trip in progress",
+    "statusOff": "Automatic off",
     "statusOffHint": "Allow location “Always” so trips are detected automatically.",
     "manualStart": "Start trip",
     "manualStop": "End trip",
-    "manualHint": "If automatic detection misses a trip, start it here by hand. Dr!ve ends it automatically after 3 minutes standing still.",
-    "simulationBadge": "Simulation running"
+    "manualHint": "Missed a trip? Start it here by hand.",
+    "simulationBadge": "Simulation running",
+    "panelTitle": "Detection",
+    "idleHint": "Dr!ve starts recording as soon as you drive off."
   },
   "diagnostics": {
     "title": "Diagnostics",
@@ -188,26 +199,35 @@
     "battery": "Battery"
   },
   "web": {
-    "title": "Detect trips in the browser",
-    "text": "Tap “Allow location”. Your browser will ask whether Dr!ve may use your location.",
-    "private": "Everything stays on your phone: location, trips and routes are stored only here in your browser and are never sent anywhere.",
-    "limit": "Important: in the browser this only works while this page is open and the screen is on (e.g. phone in a car mount). Dr!ve keeps the screen awake for this. If the phone locks, detection pauses.",
+    "title": "Detection",
+    "text": "Allow location so Dr!ve can detect your trips.",
+    "private": "Stored on this phone only. Nothing is sent.",
+    "limit": "Keep this page open – the screen stays on for it.",
     "start": "Allow location",
     "stop": "Stop detection",
     "status": {
       "off": "Detection off",
-      "starting": "Waiting for location …",
-      "on": "Detection running – just drive",
-      "denied": "Location not allowed. Allow it in iPhone Settings → Safari → Location.",
-      "unsupported": "This browser cannot determine your location.",
-      "error": "No GPS signal. Try again outdoors."
+      "starting": "Waiting for GPS …",
+      "on": "Detection on",
+      "denied": "Location not allowed",
+      "unsupported": "Location unavailable",
+      "error": "No GPS signal"
     },
     "screenOn": "Screen stays on",
     "phase": {
-      "idle": "Waiting for movement",
-      "candidate": "Movement detected – checking whether you're driving …",
-      "driving": "Recording trip"
+      "idle": "Ready – just drive",
+      "candidate": "Movement detected …",
+      "driving": "Trip in progress"
     },
-    "trips": "Saved trips: {{count}}"
+    "trips": "Saved trips: {{count}}",
+    "deniedHint": "Allow it in iPhone Settings → Safari → Location."
+  },
+  "empty": {
+    "tripsTitle": "No trips yet",
+    "tripsText": "Your trips will appear here, newest first.",
+    "compareTitle": "Compare with friends",
+    "compareText": "Invite friends with a code and compare your week – by distance, trips and streak. Never by speed.",
+    "achTitle": "Badges",
+    "achText": "Badges for distance, streaks and special trips. Never for high speed."
   }
 }

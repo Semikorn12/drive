@@ -23,16 +23,16 @@ export function OnboardingStep({ step, total, title, subtitle, children, footer 
   return (
     <View style={[styles.root, { backgroundColor: t.colors.background }]}>
       <AppHeader />
-      <ScrollView contentContainerStyle={{ padding: t.spacing.xl, gap: t.spacing.lg }}>
+      <ScrollView contentContainerStyle={{ padding: t.spacing.xl, paddingTop: t.spacing.lg, gap: t.spacing.md }}>
         <View style={styles.dots} accessibilityLabel={tr('onboarding.step', { current: step, total })}>
           {Array.from({ length: total }, (_, i) => (
             <View
               key={i}
-              style={[styles.dot, { backgroundColor: i < step ? t.colors.accent : t.colors.border, width: i === step - 1 ? 24 : 8 }]}
+              style={[styles.dot, { backgroundColor: i < step ? t.colors.accent : t.colors.surfaceElevated }]}
             />
           ))}
         </View>
-        <Title>{title}</Title>
+        <Title style={{ marginTop: t.spacing.md }}>{title}</Title>
         <Body muted>{subtitle}</Body>
         <View style={{ gap: t.spacing.md, marginTop: t.spacing.md }}>{children}</View>
       </ScrollView>
@@ -43,8 +43,8 @@ export function OnboardingStep({ step, total, title, subtitle, children, footer 
 
 const styles = StyleSheet.create({
   root: { flex: 1 },
-  dots: { flexDirection: 'row', gap: 6 },
-  dot: { height: 8, borderRadius: 4 },
+  dots: { flexDirection: 'row', gap: 4 },
+  dot: { height: 3, borderRadius: 2, flex: 1 },
 });
 
 export const ONBOARDING_STEPS = 7;

@@ -1,6 +1,6 @@
 import { useSettings } from '../state/settingsStore';
 import { themes, type ThemeColors, type ThemeMode } from './themes';
-import { fontSize, fontWeight, lineHeight, motion, palette, radius, spacing } from './tokens';
+import { fonts, fontSize, fontWeight, lineHeight, motion, palette, radius, spacing } from './tokens';
 
 export * from './tokens';
 export * from './themes';
@@ -11,6 +11,7 @@ export interface Theme {
   spacing: typeof spacing;
   radius: typeof radius;
   fontSize: typeof fontSize;
+  fonts: typeof fonts;
   fontWeight: typeof fontWeight;
   lineHeight: typeof lineHeight;
   motion: typeof motion;
@@ -18,7 +19,7 @@ export interface Theme {
 }
 
 export function buildTheme(mode: ThemeMode): Theme {
-  return { mode, colors: themes[mode], spacing, radius, fontSize, fontWeight, lineHeight, motion, palette };
+  return { mode, colors: themes[mode], spacing, radius, fontSize, fonts, fontWeight, lineHeight, motion, palette };
 }
 
 const cache: Record<ThemeMode, Theme> = { dark: buildTheme('dark'), light: buildTheme('light') };

@@ -1,7 +1,7 @@
 import { LOGO_ASPECT } from './logoGeometry';
 
 /** Size/position of the logo in the app header. The intro animation flies to exactly this spot. */
-export const HEADER_LOGO_WIDTH = 104;
+export const HEADER_LOGO_WIDTH = 82;
 export const HEADER_LOGO_HEIGHT = HEADER_LOGO_WIDTH * LOGO_ASPECT;
 /** Distance between safe-area top and the logo. */
 export const HEADER_LOGO_TOP = 8;

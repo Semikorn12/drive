@@ -11,7 +11,7 @@
     "trips": "Fahrten",
     "compare": "Vergleich",
     "achievements": "Erfolge",
-    "settings": "Einstellungen"
+    "settings": "Mehr"
   },
   "onboarding": {
     "step": "Schritt {{current}} von {{total}}",
@@ -88,7 +88,13 @@
     "duration": "Fahrzeit",
     "streak": "Serie",
     "emptyTitle": "Noch keine Fahrten",
-    "emptyText": "Sobald du fährst, zeichnet Dr!ve deine Fahrt automatisch auf."
+    "emptyText": "Sobald du fährst, zeichnet Dr!ve deine Fahrt automatisch auf.",
+    "distanceLabel": "Strecke",
+    "days": "Tage",
+    "vsLastWeek": "{{value}} zur Vorwoche",
+    "firstWeek": "Vergleich zur Vorwoche ab nächster Woche",
+    "lastTrip": "Letzte Fahrt",
+    "noTrips": "Noch keine Fahrten – fahr einfach los."
   },
   "trips": {
     "title": "Fahrten",
@@ -119,7 +125,10 @@
     "deleteConfirm": "Löschen",
     "cancel": "Abbrechen",
     "deleted": "Gelöscht",
-    "diagnosticsUnlocked": "Diagnose freigeschaltet"
+    "diagnosticsUnlocked": "Diagnose freigeschaltet",
+    "general": "Allgemein",
+    "data": "Daten",
+    "about": "Über Dr!ve"
   },
   "intro": {
     "skipHint": "Antippen zum Überspringen",
@@ -128,15 +137,17 @@
   "tracking": {
     "androidNotificationTitle": "Dr!ve zeichnet auf",
     "androidNotificationBody": "Deine Fahrt wird erkannt und gespeichert.",
-    "statusIdle": "Automatische Erkennung aktiv",
-    "statusCandidate": "Bewegung erkannt – prüfe, ob du fährst …",
-    "statusDriving": "Fahrt wird aufgezeichnet",
-    "statusOff": "Automatische Erkennung aus",
+    "statusIdle": "Automatisch aktiv",
+    "statusCandidate": "Bewegung erkannt …",
+    "statusDriving": "Fahrt läuft",
+    "statusOff": "Automatik aus",
     "statusOffHint": "Erlaube den Standort „Immer“, damit Fahrten automatisch erkannt werden.",
     "manualStart": "Fahrt starten",
     "manualStop": "Fahrt beenden",
-    "manualHint": "Falls die automatische Erkennung eine Fahrt verpasst: hier von Hand starten. Dr!ve beendet sie automatisch nach 3 Minuten Stillstand.",
-    "simulationBadge": "Simulation läuft"
+    "manualHint": "Fahrt verpasst? Starte sie hier von Hand.",
+    "simulationBadge": "Simulation läuft",
+    "panelTitle": "Erkennung",
+    "idleHint": "Dr!ve startet die Aufzeichnung, sobald du losfährst."
   },
   "diagnostics": {
     "title": "Diagnose",
@@ -188,26 +199,35 @@
     "battery": "Akku"
   },
   "web": {
-    "title": "Fahrten im Browser erkennen",
-    "text": "Tippe auf „Standort erlauben“. Dein Browser fragt dann, ob Dr!ve deinen Standort nutzen darf.",
-    "private": "Alles bleibt auf deinem Handy: Standort, Fahrten und Routen werden nur hier im Browser gespeichert und nirgendwohin gesendet.",
-    "limit": "Wichtig: Im Browser funktioniert das nur, solange diese Seite offen und der Bildschirm an ist (z. B. Handy in der Halterung). Dr!ve hält den Bildschirm dafür wach. Wird das Handy gesperrt, pausiert die Erkennung.",
+    "title": "Erkennung",
+    "text": "Erlaube den Standort, damit Dr!ve deine Fahrten erkennt.",
+    "private": "Nur auf diesem Handy gespeichert. Nichts wird gesendet.",
+    "limit": "Seite offen lassen – der Bildschirm bleibt dafür an.",
     "start": "Standort erlauben",
     "stop": "Erkennung stoppen",
     "status": {
       "off": "Erkennung aus",
-      "starting": "Warte auf Standort …",
-      "on": "Erkennung läuft – fahr einfach los",
-      "denied": "Standort nicht erlaubt. Erlaube ihn in den iPhone-Einstellungen → Safari → Standort.",
-      "unsupported": "Dieser Browser kann keinen Standort ermitteln.",
-      "error": "Kein GPS-Signal. Versuch es draußen noch einmal."
+      "starting": "Warte auf GPS …",
+      "on": "Erkennung läuft",
+      "denied": "Standort nicht erlaubt",
+      "unsupported": "Standort nicht verfügbar",
+      "error": "Kein GPS-Signal"
     },
     "screenOn": "Bildschirm bleibt an",
     "phase": {
-      "idle": "Warte auf Bewegung",
-      "candidate": "Bewegung erkannt – prüfe, ob du fährst …",
-      "driving": "Fahrt wird aufgezeichnet"
+      "idle": "Bereit – fahr einfach los",
+      "candidate": "Bewegung erkannt …",
+      "driving": "Fahrt läuft"
     },
-    "trips": "Gespeicherte Fahrten: {{count}}"
+    "trips": "Gespeicherte Fahrten: {{count}}",
+    "deniedHint": "Erlaube ihn in den iPhone-Einstellungen → Safari → Standort."
+  },
+  "empty": {
+    "tripsTitle": "Noch keine Fahrten",
+    "tripsText": "Deine Fahrten erscheinen hier, die neueste oben.",
+    "compareTitle": "Mit Freunden vergleichen",
+    "compareText": "Lade Freunde per Code ein und vergleicht eure Woche – nach Kilometern, Fahrten und Serie. Nie nach Tempo.",
+    "achTitle": "Erfolge",
+    "achText": "Abzeichen für Strecke, Serien und besondere Fahrten. Nie für hohes Tempo."
   }
 }

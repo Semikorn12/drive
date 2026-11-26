@@ -1,16 +1,13 @@
 import { useTranslation } from 'react-i18next';
 
-import { Card } from '../../components/ui/Card';
+import { EmptyState } from '../../components/ui/EmptyState';
 import { Screen } from '../../components/ui/Screen';
-import { Body } from '../../components/ui/Typography';
 
 export default function CompareScreen() {
   const { t } = useTranslation();
   return (
     <Screen title={t('compare.title')}>
-      <Card decoId="compare">
-        <Body muted>{t('compare.text')}</Body>
-      </Card>
+      <EmptyState icon="users" title={t('empty.compareTitle')} text={t('empty.compareText')} />
     </Screen>
   );
 }

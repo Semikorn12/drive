@@ -8,6 +8,7 @@ import { openAppSettings } from '../../services/permissions';
 import { useTheme } from '../../theme';
 import { Button } from '../ui/Button';
 import { Card } from '../ui/Card';
+import { Icon } from '../ui/Icon';
 import { Body } from '../ui/Typography';
 import { ONBOARDING_STEPS, OnboardingStep } from './OnboardingStep';
 
@@ -57,7 +58,7 @@ export function PermissionStep({ step, prefix, bullets, request, next }: Props) 
         result == null ? (
           <>
             <Button label={t('onboarding.perm.allow')} onPress={ask} disabled={busy} />
-            <Button label={t('onboarding.perm.notNow')} variant="ghost" onPress={() => router.push(next)} />
+            <Button label={t('onboarding.perm.notNow')} variant="ghost" compact onPress={() => router.push(next)} />
           </>
         ) : (
           <>
@@ -69,15 +70,19 @@ export function PermissionStep({ step, prefix, bullets, request, next }: Props) 
         )
       }
     >
-      {bullets.map((b) => (
-        <View key={b} style={styles.row}>
-          <View style={[styles.bullet, { backgroundColor: theme.colors.accent }]} />
-          <Body style={{ flex: 1 }}>{t(`${prefix}.${b}`)}</Body>
-        </View>
-      ))}
+      <Card>
+        {bullets.map((b, i) => (
+          <View key={b} style={[styles.row, i > 0 && { marginTop: 14 }]}>
+            <View style={[styles.bullet, { backgroundColor: theme.colors.accentSoft }]}>
+              <Icon name="check" size={13} color={theme.colors.accent} />
+            </View>
+            <Body style={{ flex: 1 }}>{t(`${prefix}.${b}`)}</Body>
+          </View>
+        ))}
+      </Card>
       {message ? (
         <Card>
-          <Text style={{ color: result === 'granted' ? theme.colors.positive : theme.colors.text, fontSize: theme.fontSize.body }}>
+          <Text style={{ color: result === 'granted' ? theme.colors.positive : theme.colors.text, fontSize: theme.fontSize.body, fontFamily: theme.fonts.medium }}>
             {message}
           </Text>
         </Card>
@@ -88,5 +93,5 @@ export function PermissionStep({ step, prefix, bullets, request, next }: Props) 
 
 const styles = StyleSheet.create({
   row: { flexDirection: 'row', gap: 12, alignItems: 'flex-start' },
-  bullet: { width: 8, height: 8, borderRadius: 4, marginTop: 8 },
+  bullet: { width: 24, height: 24, borderRadius: 12, alignItems: 'center', justifyContent: 'center', marginTop: -1 },
 });

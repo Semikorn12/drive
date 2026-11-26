@@ -1,32 +1,30 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTheme } from '../../theme';
 import { HEADER_LOGO_TOP, HEADER_LOGO_WIDTH } from '../brand/brandLayout';
 import { Logo } from '../brand/Logo';
-import { DecoCurves } from './DecoCurves';
+import { Caption, Title } from './Typography';
 
-/** Cockpit-style header with the Dr!ve logo at the exact spot the intro animation lands. */
-export function AppHeader({ title }: { title?: string }) {
+/** Slim header: small centered wordmark (where the intro animation lands), then a left-aligned title. */
+export function AppHeader({ title, subtitle }: { title?: string; subtitle?: string }) {
   const insets = useSafeAreaInsets();
   const t = useTheme();
   return (
-    <View style={[styles.wrap, { paddingTop: insets.top + HEADER_LOGO_TOP, backgroundColor: t.colors.background }]}>
-      <DecoCurves id="header" variant="header" />
+    <View style={{ paddingTop: insets.top + HEADER_LOGO_TOP, backgroundColor: t.colors.background }}>
       <View style={styles.logoRow}>
         <Logo width={HEADER_LOGO_WIDTH} color={t.colors.text} />
       </View>
       {title ? (
-        <Text style={[styles.title, { color: t.colors.text, fontSize: t.fontSize.headline, paddingHorizontal: t.spacing.lg }]}>
-          {title}
-        </Text>
+        <View style={{ paddingHorizontal: t.spacing.xl - 4, paddingTop: t.spacing.lg, paddingBottom: t.spacing.xs }}>
+          <Title accessibilityRole="header">{title}</Title>
+          {subtitle ? <Caption style={{ marginTop: 2 }}>{subtitle}</Caption> : null}
+        </View>
       ) : null}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  wrap: { overflow: 'hidden', paddingBottom: 12 },
-  logoRow: { alignItems: 'center' },
-  title: { fontWeight: '800', marginTop: 8, letterSpacing: 0.3 },
+  logoRow: { alignItems: 'center', paddingBottom: 4 },
 });

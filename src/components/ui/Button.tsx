@@ -1,17 +1,22 @@
-import { Pressable, StyleSheet, Text } from 'react-native';
+import type { ReactNode } from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { useTheme } from '../../theme';
 
 interface Props {
   label: string;
   onPress: () => void;
-  variant?: 'primary' | 'ghost';
+  /** primary = orange, secondary = filled surface, ghost = text only, danger = red text */
+  variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
   disabled?: boolean;
+  icon?: ReactNode;
+  compact?: boolean;
 }
 
-export function Button({ label, onPress, variant = 'primary', disabled }: Props) {
+export function Button({ label, onPress, variant = 'primary', disabled, icon, compact }: Props) {
   const t = useTheme();
-  const primary = variant === 'primary';
+  const bg = { primary: t.colors.accent, secondary: t.colors.surfaceElevated, ghost: 'transparent', danger: 'transparent' }[variant];
+  const fg = { primary: t.colors.onAccent, secondary: t.colors.text, ghost: t.colors.textMuted, danger: t.colors.negative }[variant];
   return (
     <Pressable
       onPress={onPress}
@@ -21,28 +26,22 @@ export function Button({ label, onPress, variant = 'primary', disabled }: Props)
       style={({ pressed }) => [
         styles.base,
         {
-          borderRadius: t.radius.pill,
-          paddingVertical: t.spacing.md + 2,
-          backgroundColor: primary ? (pressed ? t.colors.accentPressed : t.colors.accent) : 'transparent',
-          borderColor: primary ? 'transparent' : t.colors.border,
-          opacity: disabled ? 0.45 : 1,
+          height: compact ? 44 : 52,
+          borderRadius: t.radius.lg,
+          backgroundColor: variant === 'primary' && pressed ? t.colors.accentPressed : bg,
+          opacity: disabled ? 0.4 : pressed && variant !== 'primary' ? 0.6 : 1,
         },
       ]}
     >
-      <Text
-        style={{
-          color: primary ? t.colors.onAccent : t.colors.text,
-          fontSize: t.fontSize.body,
-          fontWeight: t.fontWeight.bold,
-          letterSpacing: 0.4,
-        }}
-      >
-        {label}
-      </Text>
+      <View style={styles.row}>
+        {icon}
+        <Text style={{ color: fg, fontFamily: t.fonts.semibold, fontSize: t.fontSize.body }}>{label}</Text>
+      </View>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  base: { alignItems: 'center', justifyContent: 'center', borderWidth: 1.5, paddingHorizontal: 24 },
+  base: { alignItems: 'center', justifyContent: 'center', paddingHorizontal: 20, flexGrow: 1 },
+  row: { flexDirection: 'row', alignItems: 'center', gap: 8 },
 });

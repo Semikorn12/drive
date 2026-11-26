@@ -1,47 +1,21 @@
 import Constants from 'expo-constants';
-import type { ReactNode } from 'react';
 import { router } from 'expo-router';
 import { useRef } from 'react';
-import { Alert, Pressable, Text, View } from 'react-native';
+import { Alert, Platform, Pressable } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { Card } from '../../components/ui/Card';
-import { OptionRow } from '../../components/ui/OptionRow';
+import { ListControlRow, ListGroup, ListRow } from '../../components/ui/List';
 import { Screen } from '../../components/ui/Screen';
-import { Body, Label } from '../../components/ui/Typography';
-import { deviceLanguage, SUPPORTED_LANGUAGES } from '../../i18n';
+import { Segmented } from '../../components/ui/Segmented';
+import { Caption } from '../../components/ui/Typography';
 import { wipeLocalDatabase } from '../../data/db';
+import { deviceLanguage } from '../../i18n';
 import { resetEngine } from '../../services/tracking/engine';
-import { useSettings, type SpeedUnit } from '../../state/settingsStore';
-import { useTheme, type ThemeMode } from '../../theme';
-
-const MODES: ThemeMode[] = ['dark', 'light'];
-const UNITS: SpeedUnit[] = ['kmh', 'mph'];
-
-function Section({ title, children }: { title: string; children: ReactNode }) {
-  const theme = useTheme();
-  return (
-    <View style={{ gap: theme.spacing.sm }}>
-      <Label>{title}</Label>
-      {children}
-    </View>
-  );
-}
-
-function ComingSoonRow({ label }: { label: string }) {
-  const theme = useTheme();
-  const { t } = useTranslation();
-  return (
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingVertical: theme.spacing.sm, opacity: 0.5 }}>
-      <Body>{label}</Body>
-      <Body muted>{t('common.comingSoon')}</Body>
-    </View>
-  );
-}
+import { useSettings, type Language, type SpeedUnit } from '../../state/settingsStore';
+import type { ThemeMode } from '../../theme';
 
 export default function SettingsScreen() {
   const { t } = useTranslation();
-  const theme = useTheme();
   const s = useSettings();
   const language = s.language ?? deviceLanguage();
   const taps = useRef({ n: 0, last: 0 });
@@ -56,54 +30,72 @@ export default function SettingsScreen() {
     }
   };
 
-  const confirmDelete = () =>
+  const wipe = async () => {
+    await resetEngine();
+    await wipeLocalDatabase();
+  };
+
+  const confirmDelete = () => {
+    if (Platform.OS === 'web') {
+      if (window.confirm(`${t('settings.deleteConfirmTitle')}\n\n${t('settings.deleteConfirmText')}`)) void wipe();
+      return;
+    }
     Alert.alert(t('settings.deleteConfirmTitle'), t('settings.deleteConfirmText'), [
       { text: t('settings.cancel'), style: 'cancel' },
-      {
-        text: t('settings.deleteConfirm'),
-        style: 'destructive',
-        onPress: async () => {
-          await resetEngine();
-          await wipeLocalDatabase();
-          Alert.alert(t('settings.deleted'));
-        },
-      },
+      { text: t('settings.deleteConfirm'), style: 'destructive', onPress: () => void wipe().then(() => Alert.alert(t('settings.deleted'))) },
     ]);
+  };
 
   return (
     <Screen title={t('settings.title')}>
-      <Section title={t('settings.language')}>
-        {SUPPORTED_LANGUAGES.map((l) => (
-          <OptionRow key={l} label={t(`language.${l}`)} selected={language === l} onPress={() => s.setLanguage(l)} />
-        ))}
-      </Section>
-      <Section title={t('settings.theme')}>
-        {MODES.map((m) => (
-          <OptionRow key={m} label={t(`theme.${m}`)} selected={s.themeMode === m} onPress={() => s.setThemeMode(m)} />
-        ))}
-      </Section>
-      <Section title={t('settings.units')}>
-        {UNITS.map((u) => (
-          <OptionRow key={u} label={t(`units.${u}`)} selected={s.speedUnit === u} onPress={() => s.setSpeedUnit(u)} />
-        ))}
-      </Section>
-      <Card>
-        <ComingSoonRow label={t('settings.account')} />
-        <ComingSoonRow label={t('settings.export')} />
-      </Card>
-      <Pressable onPress={confirmDelete} accessibilityRole="button">
-        <Text style={{ color: theme.colors.negative, fontWeight: '700' }}>{t('settings.deleteData')}</Text>
-      </Pressable>
-      <Section title={t('settings.privacy')}>
-        <Body muted>{t('settings.privacyText')}</Body>
-      </Section>
-      <Pressable onPress={s.resetOnboarding} accessibilityRole="button">
-        <Text style={{ color: theme.colors.accent, fontWeight: '700' }}>{t('settings.replayOnboarding')}</Text>
-      </Pressable>
-      <Pressable onPress={onVersionTap} accessibilityRole="text">
-        <Body muted style={{ textAlign: 'center', fontSize: theme.fontSize.caption }}>
-          {t('settings.version', { version: Constants.expoConfig?.version ?? '?' })}
-        </Body>
+      <ListGroup title={t('settings.general')}>
+        <ListControlRow label={t('settings.language')}>
+          <Segmented<Language>
+            value={language}
+            onChange={s.setLanguage}
+            options={[
+              { value: 'de', label: 'Deutsch' },
+              { value: 'en', label: 'English' },
+            ]}
+          />
+        </ListControlRow>
+        <ListControlRow label={t('settings.theme')}>
+          <Segmented<ThemeMode>
+            value={s.themeMode}
+            onChange={s.setThemeMode}
+            options={[
+              { value: 'dark', label: t('theme.dark') },
+              { value: 'light', label: t('theme.light') },
+            ]}
+          />
+        </ListControlRow>
+        <ListControlRow label={t('settings.units')}>
+          <Segmented<SpeedUnit>
+            value={s.speedUnit}
+            onChange={s.setSpeedUnit}
+            options={[
+              { value: 'kmh', label: 'km/h' },
+              { value: 'mph', label: 'mph' },
+            ]}
+          />
+        </ListControlRow>
+      </ListGroup>
+
+      <ListGroup title={t('settings.account')}>
+        <ListRow label={t('settings.account')} value={t('common.comingSoon')} disabled />
+      </ListGroup>
+
+      <ListGroup title={t('settings.data')} footer={t('settings.privacyText')}>
+        <ListRow label={t('settings.export')} value={t('common.comingSoon')} disabled />
+        <ListRow label={t('settings.deleteData')} tone="danger" onPress={confirmDelete} />
+      </ListGroup>
+
+      <ListGroup title={t('settings.about')}>
+        <ListRow label={t('settings.replayOnboarding')} onPress={s.resetOnboarding} chevron />
+      </ListGroup>
+
+      <Pressable onPress={onVersionTap} accessibilityRole="text" style={{ alignItems: 'center', paddingVertical: 8 }}>
+        <Caption>{t('settings.version', { version: Constants.expoConfig?.version ?? '?' })}</Caption>
       </Pressable>
     </Screen>
   );
