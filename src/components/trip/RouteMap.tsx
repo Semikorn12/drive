@@ -1,18 +1,18 @@
 import { useMemo, useState } from 'react';
 import { View } from 'react-native';
-import Svg, { Circle, Defs, Line, LinearGradient, Path, Stop } from 'react-native-svg';
+import Svg, { Circle, Line, Path } from 'react-native-svg';
 
 import type { LocationSample } from '../../domain/detection/types';
 import { projectRoute, toSvgPath } from '../../domain/route/route';
 import { useTheme } from '../../theme';
 
-const HEIGHT = 220;
+const HEIGHT = 240;
 const GRID = 6;
 
 /**
  * Route sketch drawn from the trip's own GPS points (no map tiles → works offline,
  * in the browser and needs no API key; the route never leaves the device).
- * North is up. Green dot = start, orange dot = finish.
+ * North is up. Hollow dot = start, orange dot = finish.
  */
 export function RouteMap({ points }: { points: LocationSample[] }) {
   const theme = useTheme();
@@ -27,12 +27,6 @@ export function RouteMap({ points }: { points: LocationSample[] }) {
     >
       {route && width > 0 ? (
         <Svg width={width} height={HEIGHT}>
-          <Defs>
-            <LinearGradient id="route" x1="0" y1="0" x2="1" y2="1">
-              <Stop offset="0" stopColor={theme.colors.decoFrom} />
-              <Stop offset="1" stopColor={theme.colors.accent} />
-            </LinearGradient>
-          </Defs>
           {Array.from({ length: GRID - 1 }, (_, i) => (
             <Line
               key={`h${i}`}
@@ -42,6 +36,7 @@ export function RouteMap({ points }: { points: LocationSample[] }) {
               y2={((i + 1) * HEIGHT) / GRID}
               stroke={theme.colors.border}
               strokeWidth={0.5}
+              strokeOpacity={0.6}
             />
           ))}
           {Array.from({ length: Math.ceil(width / (HEIGHT / GRID)) }, (_, i) => (
@@ -53,16 +48,16 @@ export function RouteMap({ points }: { points: LocationSample[] }) {
               x2={((i + 1) * HEIGHT) / GRID}
               stroke={theme.colors.border}
               strokeWidth={0.5}
+              strokeOpacity={0.6}
             />
           ))}
-          {/* Soft glow under the line */}
-          <Path d={path} stroke={theme.colors.accent} strokeOpacity={0.25} strokeWidth={10} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-          <Path d={path} stroke="url(#route)" strokeWidth={4} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+          <Path d={path} stroke={theme.colors.accent} strokeOpacity={0.18} strokeWidth={9} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+          <Path d={path} stroke={theme.colors.accent} strokeWidth={3.5} fill="none" strokeLinecap="round" strokeLinejoin="round" />
           {route.start ? (
-            <Circle cx={route.start.x} cy={route.start.y} r={7} fill={theme.colors.positive} stroke={theme.colors.surface} strokeWidth={3} />
+            <Circle cx={route.start.x} cy={route.start.y} r={6} fill={theme.colors.surfaceElevated} stroke={theme.colors.text} strokeWidth={2.5} />
           ) : null}
           {route.end && route.points.length > 1 ? (
-            <Circle cx={route.end.x} cy={route.end.y} r={7} fill={theme.colors.accent} stroke={theme.colors.surface} strokeWidth={3} />
+            <Circle cx={route.end.x} cy={route.end.y} r={6.5} fill={theme.colors.accent} stroke={theme.colors.surfaceElevated} strokeWidth={2.5} />
           ) : null}
         </Svg>
       ) : null}

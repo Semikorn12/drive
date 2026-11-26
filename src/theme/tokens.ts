@@ -23,6 +23,18 @@ export const palette = {
   orange600: '#E8741A',
   orange100: '#FFE7D3',
 
+  // Ink (app surfaces) – near-black with a hint of the brand blue
+  ink950: '#090B10',
+  ink900: '#12151C',
+  ink850: '#191D26',
+  ink800: '#222733',
+  ink500: '#5D6373',
+  ink400: '#8B91A1',
+  paper50: '#F4F4F6',
+  paper100: '#EBECF0',
+  paper200: '#DFE1E7',
+  paper600: '#5F6573',
+
   // Neutrals
   white: '#FFFFFF',
   gray100: '#E9ECF4',
@@ -50,8 +62,8 @@ export const spacing = {
 export const radius = {
   sm: 8,
   md: 12,
-  lg: 18,
-  xl: 24,
+  lg: 16,
+  xl: 22,
   pill: 999,
 } as const;
 
@@ -60,8 +72,8 @@ export const fontSize = {
   small: 14,
   body: 16,
   title: 20,
-  headline: 26,
-  display: 40,
+  headline: 30,
+  display: 52,
   gauge: 72,
 } as const;
 

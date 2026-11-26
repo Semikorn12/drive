@@ -1,16 +1,16 @@
 import { useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { readPermissions } from '../services/permissions';
 import { manualStart, manualStop } from '../services/tracking/engine';
 import { useLive } from '../services/tracking/liveStore';
 import { useTheme } from '../theme';
+import { StatusLine } from './tracking/StatusLine';
 import { LiveGauge } from './trip/LiveGauge';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
-import { Body } from './ui/Typography';
 
 /**
  * Detection status + the always-visible manual Start/Stop button
@@ -30,60 +30,34 @@ export function TrackingCard() {
     }, []),
   );
 
-  const status =
-    phase === 'driving'
-      ? t('tracking.statusDriving')
-      : phase === 'candidate'
-        ? t('tracking.statusCandidate')
-        : autoOn === false
-          ? t('tracking.statusOff')
-          : t('tracking.statusIdle');
-  const dot = phase === 'driving' ? theme.colors.accent : autoOn === false ? theme.colors.negative : theme.colors.positive;
-
+  const driving = phase === 'driving';
   const toggle = async () => {
     setBusy(true);
     try {
-      await (phase === 'driving' ? manualStop() : manualStart());
+      await (driving ? manualStop() : manualStart());
     } finally {
       setBusy(false);
     }
   };
 
+  const title =
+    phase === 'candidate' ? t('tracking.statusCandidate') : autoOn === false ? t('tracking.statusOff') : t('tracking.statusIdle');
+  const detail = sim ? t('tracking.simulationBadge') : autoOn === false ? t('tracking.statusOffHint') : null;
+
   return (
-    <Card>
-      <View style={styles.row}>
-        <View style={[styles.dot, { backgroundColor: dot }]} />
-        <Text style={{ color: theme.colors.text, fontWeight: '700', fontSize: theme.fontSize.body, flex: 1 }}>{status}</Text>
-      </View>
-      {phase === 'driving' ? (
-        <View style={{ marginTop: theme.spacing.md }}>
-          <LiveGauge />
-        </View>
-      ) : null}
-      {sim ? <Body muted style={{ marginTop: 4 }}>{t('tracking.simulationBadge')}</Body> : null}
-      {autoOn === false && phase === 'idle' ? (
-        <Body muted style={{ marginTop: 6 }}>
-          {t('tracking.statusOffHint')}
-        </Body>
-      ) : null}
-      <View style={{ marginTop: theme.spacing.md }}>
-        <Button
-          label={phase === 'driving' ? t('tracking.manualStop') : t('tracking.manualStart')}
-          onPress={toggle}
-          disabled={busy || sim}
-          variant={phase === 'driving' ? 'ghost' : 'primary'}
-        />
-      </View>
-      {phase !== 'driving' ? (
-        <Body muted style={{ marginTop: theme.spacing.sm, fontSize: theme.fontSize.caption }}>
-          {t('tracking.manualHint')}
-        </Body>
-      ) : null}
+    <Card style={{ gap: theme.spacing.lg }}>
+      {driving ? (
+        <LiveGauge />
+      ) : (
+        <StatusLine tone={autoOn === false ? 'off' : phase === 'candidate' ? 'driving' : 'active'} title={title} detail={detail} />
+      )}
+      <Button
+        label={driving ? t('tracking.manualStop') : t('tracking.manualStart')}
+        onPress={toggle}
+        disabled={busy || sim}
+        variant={driving ? 'ghost' : 'primary'}
+      />
+      {driving ? null : <Text style={{ color: theme.colors.textMuted, fontSize: 13, lineHeight: 18 }}>{t('tracking.manualHint')}</Text>}
     </Card>
   );
 }
-
-const styles = StyleSheet.create({
-  row: { flexDirection: 'row', alignItems: 'center', gap: 10 },
-  dot: { width: 10, height: 10, borderRadius: 5 },
-});

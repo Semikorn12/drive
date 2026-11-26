@@ -22,7 +22,7 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
   const theme = useTheme();
   return (
     <View style={{ gap: theme.spacing.sm }}>
-      <Label>{title}</Label>
+      <Label style={{ paddingHorizontal: 4 }}>{title}</Label>
       {children}
     </View>
   );
@@ -73,32 +73,38 @@ export default function SettingsScreen() {
   return (
     <Screen title={t('settings.title')}>
       <Section title={t('settings.language')}>
-        {SUPPORTED_LANGUAGES.map((l) => (
-          <OptionRow key={l} label={t(`language.${l}`)} selected={language === l} onPress={() => s.setLanguage(l)} />
-        ))}
+        <Card flush>
+          {SUPPORTED_LANGUAGES.map((l, i) => (
+            <OptionRow key={l} grouped divider={i > 0} label={t(`language.${l}`)} selected={language === l} onPress={() => s.setLanguage(l)} />
+          ))}
+        </Card>
       </Section>
       <Section title={t('settings.theme')}>
-        {MODES.map((m) => (
-          <OptionRow key={m} label={t(`theme.${m}`)} selected={s.themeMode === m} onPress={() => s.setThemeMode(m)} />
-        ))}
+        <Card flush>
+          {MODES.map((m, i) => (
+            <OptionRow key={m} grouped divider={i > 0} label={t(`theme.${m}`)} selected={s.themeMode === m} onPress={() => s.setThemeMode(m)} />
+          ))}
+        </Card>
       </Section>
       <Section title={t('settings.units')}>
-        {UNITS.map((u) => (
-          <OptionRow key={u} label={t(`units.${u}`)} selected={s.speedUnit === u} onPress={() => s.setSpeedUnit(u)} />
-        ))}
+        <Card flush>
+          {UNITS.map((u, i) => (
+            <OptionRow key={u} grouped divider={i > 0} label={t(`units.${u}`)} selected={s.speedUnit === u} onPress={() => s.setSpeedUnit(u)} />
+          ))}
+        </Card>
       </Section>
       <Card>
         <ComingSoonRow label={t('settings.account')} />
         <ComingSoonRow label={t('settings.export')} />
       </Card>
       <Pressable onPress={confirmDelete} accessibilityRole="button">
-        <Text style={{ color: theme.colors.negative, fontWeight: '700' }}>{t('settings.deleteData')}</Text>
+        <Text style={{ color: theme.colors.negative, fontWeight: '600', fontSize: theme.fontSize.body }}>{t('settings.deleteData')}</Text>
       </Pressable>
       <Section title={t('settings.privacy')}>
         <Body muted>{t('settings.privacyText')}</Body>
       </Section>
       <Pressable onPress={s.resetOnboarding} accessibilityRole="button">
-        <Text style={{ color: theme.colors.accent, fontWeight: '700' }}>{t('settings.replayOnboarding')}</Text>
+        <Text style={{ color: theme.colors.accent, fontWeight: '600', fontSize: theme.fontSize.body }}>{t('settings.replayOnboarding')}</Text>
       </Pressable>
       <Pressable onPress={onVersionTap} accessibilityRole="text">
         <Body muted style={{ textAlign: 'center', fontSize: theme.fontSize.caption }}>

@@ -50,8 +50,8 @@ export function SpeedChart({ points, unit }: { points: LocationSample[]; unit: S
         <Svg width={width} height={HEIGHT}>
           <Defs>
             <LinearGradient id="speedFill" x1="0" y1="0" x2="0" y2="1">
-              <Stop offset="0" stopColor={theme.colors.accent} stopOpacity={0.45} />
-              <Stop offset="1" stopColor={theme.colors.accent} stopOpacity={0.02} />
+              <Stop offset="0" stopColor={theme.colors.accent} stopOpacity={0.28} />
+              <Stop offset="1" stopColor={theme.colors.accent} stopOpacity={0} />
             </LinearGradient>
           </Defs>
           {ticks.map((v) => (
@@ -63,7 +63,7 @@ export function SpeedChart({ points, unit }: { points: LocationSample[]; unit: S
             </SvgText>
           ))}
           <Path d={area} fill="url(#speedFill)" />
-          <Path d={line} stroke={theme.colors.accent} strokeWidth={2.5} fill="none" strokeLinejoin="round" strokeLinecap="round" />
+          <Path d={line} stroke={theme.colors.accent} strokeWidth={2} fill="none" strokeLinejoin="round" strokeLinecap="round" />
           <SvgText x={PAD.left} y={HEIGHT - 6} fontSize={11} fontFamily={SVG_FONT} fill={theme.colors.textMuted}>
             0 min
           </SvgText>

@@ -1,6 +1,6 @@
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { AdBanner } from '../../components/AdBanner';
@@ -56,16 +56,18 @@ export default function TripsScreen() {
         ? groupByDay(trips, (x) => x.startedAt).map((g) => {
             const km = g.items.reduce((s, x) => s + x.distanceM, 0);
             return (
-              <View key={g.day} style={{ gap: theme.spacing.sm }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 4 }}>
-                  <Label>{dayLabel(g.day)}</Label>
+              <View key={g.day} style={{ gap: theme.spacing.sm + 2 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline', paddingHorizontal: 4 }}>
+                  <Text style={{ color: theme.colors.text, fontSize: 15, fontWeight: '600' }}>{dayLabel(g.day)}</Text>
                   <Label>
                     {t('trips.count', { count: g.items.length })} · {formatDistance(km, unit, i18n.language)}
                   </Label>
                 </View>
-                {g.items.map((trip) => (
-                  <TripListItem key={trip.id} trip={trip} onPress={() => router.push(`/trip/${trip.id}`)} />
-                ))}
+                <Card flush>
+                  {g.items.map((trip, i) => (
+                    <TripListItem key={trip.id} trip={trip} divider={i > 0} onPress={() => router.push(`/trip/${trip.id}`)} />
+                  ))}
+                </Card>
               </View>
             );
           })

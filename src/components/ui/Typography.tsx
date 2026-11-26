@@ -5,7 +5,11 @@ import { useTheme } from '../../theme';
 
 export function Title({ children, style }: { children: ReactNode; style?: TextStyle }) {
   const t = useTheme();
-  return <Text style={[{ color: t.colors.text, fontSize: t.fontSize.headline, fontWeight: '800' }, style]}>{children}</Text>;
+  return (
+    <Text style={[{ color: t.colors.text, fontSize: t.fontSize.headline, fontWeight: '700', letterSpacing: -0.4 }, style]}>
+      {children}
+    </Text>
+  );
 }
 
 export function Body({ children, muted, style }: { children: ReactNode; muted?: boolean; style?: TextStyle }) {
@@ -22,10 +26,28 @@ export function Body({ children, muted, style }: { children: ReactNode; muted?: 
   );
 }
 
-export function Label({ children }: { children: ReactNode }) {
+/** Small muted caption above a value or section. Sentence case, no shouting. */
+export function Label({ children, style }: { children: ReactNode; style?: TextStyle }) {
+  const t = useTheme();
+  return <Text style={[{ color: t.colors.textMuted, fontSize: 13, fontWeight: '500' }, style]}>{children}</Text>;
+}
+
+/** Numbers: fixed-width digits so values don't jump while they change. */
+export function Num({ children, size, color, style }: { children: ReactNode; size?: number; color?: string; style?: TextStyle }) {
   const t = useTheme();
   return (
-    <Text style={{ color: t.colors.textMuted, fontSize: t.fontSize.caption, fontWeight: '700', letterSpacing: 1.2, textTransform: 'uppercase' }}>
+    <Text
+      style={[
+        {
+          color: color ?? t.colors.text,
+          fontSize: size ?? t.fontSize.title,
+          fontWeight: '700',
+          fontVariant: ['tabular-nums'],
+          letterSpacing: (size ?? 20) >= 40 ? -1.5 : -0.3,
+        },
+        style,
+      ]}
+    >
       {children}
     </Text>
   );

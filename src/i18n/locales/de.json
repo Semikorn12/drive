@@ -88,7 +88,9 @@
     "duration": "Fahrzeit",
     "streak": "Serie",
     "emptyTitle": "Noch keine Fahrten",
-    "emptyText": "Sobald du fährst, zeichnet Dr!ve deine Fahrt automatisch auf."
+    "emptyText": "Noch keine Fahrt diese Woche. Sobald du fährst, zeichnet Dr!ve sie automatisch auf.",
+    "days_one": "{{count}} Tag",
+    "days_other": "{{count}} Tage"
   },
   "trips": {
     "title": "Fahrten",
@@ -215,12 +217,12 @@
       "candidate": "Bewegung erkannt – prüfe, ob du fährst …",
       "driving": "Fahrt wird aufgezeichnet"
     },
-    "trips": "Gespeicherte Fahrten: {{count}}",
-    "privateShort": "Fahrten bleiben nur auf diesem Handy",
-    "limitShort": "Seite offen lassen, Bildschirm bleibt an",
     "more": "Mehr Infos",
     "less": "Weniger",
-    "textShort": "Dr!ve braucht deinen Standort, um Fahrten zu erkennen."
+    "textShort": "Dr!ve braucht deinen Standort, um Fahrten zu erkennen.",
+    "heading": "Automatische Erkennung",
+    "footer": "Fahrten bleiben nur auf diesem Handy. Die Erkennung läuft, solange diese Seite offen ist.",
+    "runningTitle": "Erkennung läuft"
   },
   "trip": {
     "title": "Fahrt",

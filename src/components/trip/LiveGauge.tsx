@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import Svg, { Circle, Defs, Line, LinearGradient, Path, Stop, Text as SvgText } from 'react-native-svg';
+import Svg, { Circle, Line, Path, Text as SvgText } from 'react-native-svg';
 
 import { kmToMiles } from '../../domain/detection/geo';
 import { useLive } from '../../services/tracking/liveStore';
@@ -75,15 +75,9 @@ export function LiveGauge() {
     <View style={styles.wrap} accessibilityRole="summary" accessibilityLabel={`${Math.round(speed ?? 0)} ${unit === 'mph' ? 'mph' : 'km/h'}`}>
       <View style={{ width: SIZE, height: SIZE * 0.86 }}>
         <Svg width={SIZE} height={SIZE}>
-          <Defs>
-            <LinearGradient id="gaugeFill" x1="0" y1="1" x2="1" y2="0">
-              <Stop offset="0" stopColor={theme.colors.decoFrom} />
-              <Stop offset="1" stopColor={theme.colors.accent} />
-            </LinearGradient>
-          </Defs>
           <Path d={arc(START, START + SWEEP, R)} stroke={theme.colors.surfaceElevated} strokeWidth={STROKE} fill="none" strokeLinecap="round" />
           {frac > 0.005 ? (
-            <Path d={arc(START, needle, R)} stroke="url(#gaugeFill)" strokeWidth={STROKE} fill="none" strokeLinecap="round" />
+            <Path d={arc(START, needle, R)} stroke={theme.colors.accent} strokeWidth={STROKE} fill="none" strokeLinecap="round" />
           ) : null}
           {ticks.map((v) => {
             const a = START + (v / max) * SWEEP;
@@ -108,10 +102,10 @@ export function LiveGauge() {
           <Circle cx={tipOuter.x} cy={tipOuter.y} r={4} fill={theme.colors.accent} />
         </Svg>
         <View style={[StyleSheet.absoluteFill, styles.center]} pointerEvents="none">
-          <Text style={{ color: theme.colors.text, fontSize: theme.fontSize.gauge, fontWeight: '900', marginTop: 56 }}>
+          <Text style={{ color: theme.colors.text, fontSize: theme.fontSize.gauge, fontWeight: '700', fontVariant: ['tabular-nums'], letterSpacing: -2, marginTop: 56 }}>
             {speed == null ? '–' : Math.round(speed)}
           </Text>
-          <Text style={{ color: theme.colors.accent, fontSize: theme.fontSize.body, fontWeight: '700', marginTop: -6 }}>
+          <Text style={{ color: theme.colors.textMuted, fontSize: theme.fontSize.small, fontWeight: '600', marginTop: -6 }}>
             {speed == null ? t('live.noSignal') : unit === 'mph' ? 'mph' : 'km/h'}
           </Text>
         </View>
@@ -119,11 +113,11 @@ export function LiveGauge() {
       <View style={styles.row}>
         <View style={styles.cell}>
           <Label>{t('live.duration')}</Label>
-          <Text style={{ color: theme.colors.text, fontSize: theme.fontSize.title, fontWeight: '800' }}>{formatStopwatch(elapsedS)}</Text>
+          <Text style={{ color: theme.colors.text, fontSize: theme.fontSize.title, fontWeight: '700', fontVariant: ['tabular-nums'] }}>{formatStopwatch(elapsedS)}</Text>
         </View>
         <View style={styles.cell}>
           <Label>{t('live.distance')}</Label>
-          <Text style={{ color: theme.colors.text, fontSize: theme.fontSize.title, fontWeight: '800' }}>
+          <Text style={{ color: theme.colors.text, fontSize: theme.fontSize.title, fontWeight: '700', fontVariant: ['tabular-nums'] }}>
             {formatDistance(dist, unit, i18n.language)}
           </Text>
         </View>

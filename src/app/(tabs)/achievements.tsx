@@ -8,7 +8,7 @@ export default function AchievementsScreen() {
   const { t } = useTranslation();
   return (
     <Screen title={t('achievements.title')}>
-      <Card decoId="achievements">
+      <Card>
         <Body muted>{t('achievements.text')}</Body>
       </Card>
     </Screen>

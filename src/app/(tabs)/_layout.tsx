@@ -1,4 +1,5 @@
 import { Tabs } from 'expo-router';
+import { StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { TabIcon, type TabIconName } from '../../components/ui/TabIcon';
@@ -21,8 +22,8 @@ export default function TabsLayout() {
         headerShown: false,
         tabBarActiveTintColor: t.colors.accent,
         tabBarInactiveTintColor: t.colors.tabInactive,
-        tabBarStyle: { backgroundColor: t.colors.tabBar, borderTopColor: t.colors.border },
-        tabBarLabelStyle: { fontWeight: '700' },
+        tabBarStyle: { backgroundColor: t.colors.tabBar, borderTopColor: t.colors.border, borderTopWidth: StyleSheet.hairlineWidth },
+        tabBarLabelStyle: { fontWeight: '500', fontSize: 11 },
         sceneStyle: { backgroundColor: t.colors.background },
       }}
     >

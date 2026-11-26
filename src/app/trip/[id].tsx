@@ -7,7 +7,7 @@ import { RouteMap } from '../../components/trip/RouteMap';
 import { SpeedChart } from '../../components/trip/SpeedChart';
 import { Card } from '../../components/ui/Card';
 import { Screen } from '../../components/ui/Screen';
-import { Body, Label } from '../../components/ui/Typography';
+import { Body, Label, Num } from '../../components/ui/Typography';
 import { tripRepository } from '../../data/tripRepository';
 import type { LocationSample } from '../../domain/detection/types';
 import type { Trip } from '../../domain/trip';
@@ -15,7 +15,7 @@ import { useSettings } from '../../state/settingsStore';
 import { useTheme } from '../../theme';
 import { relativeDay, startOfDay } from '../../utils/days';
 import { confirmDestructive } from '../../utils/confirm';
-import { formatClock, formatDay, formatDistance, formatDuration, formatSpeed } from '../../utils/format';
+import { formatClock, formatDay, formatDuration, formatSpeed } from '../../utils/format';
 
 /** Trip detail: route sketch, key numbers and the speed chart. */
 export default function TripDetailScreen() {
@@ -67,72 +67,59 @@ export default function TripDetailScreen() {
 
   const rel = relativeDay(startOfDay(trip.startedAt));
   const title = rel ? t(`trips.${rel}`) : formatDay(trip.startedAt, lang);
-  const stats = [
-    { key: 'distance', value: formatDistance(trip.distanceM, unit, lang) },
-    { key: 'duration', value: formatDuration(trip.durationS) },
-    { key: 'avgSpeed', value: formatSpeed(trip.avgSpeedKmh, unit) },
-    { key: 'maxSpeed', value: formatSpeed(trip.maxSpeedKmh, unit) },
-  ];
+  const km = trip.distanceM / 1000;
+  const distValue = (unit === 'mph' ? km * 0.621371 : km).toLocaleString(lang, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
   return (
     <Screen title={title} onBack={back}>
-      <Card>
-        <View style={styles.times}>
-          <Endpoint color={theme.colors.positive} label={t('trip.start')} time={formatClock(trip.startedAt, lang)} />
-          <View style={[styles.dash, { borderColor: theme.colors.border }]} />
-          <Endpoint color={theme.colors.accent} label={t('trip.end')} time={formatClock(trip.endedAt, lang)} />
+      <View>
+        <View style={styles.hero}>
+          <Num size={56}>{distValue}</Num>
+          <Text style={{ color: theme.colors.textMuted, fontSize: theme.fontSize.title, fontWeight: '600', marginLeft: 6 }}>
+            {unit === 'mph' ? 'mi' : 'km'}
+          </Text>
         </View>
-        <View style={{ marginTop: theme.spacing.md }}>
-          {points.length > 0 ? <RouteMap points={points} /> : <Body muted>{t('trip.noRoute')}</Body>}
-        </View>
-        <Body muted style={{ marginTop: theme.spacing.sm, fontSize: theme.fontSize.caption }}>
-          🔒 {t('trip.privacy')}
-        </Body>
-      </Card>
+        <Text style={{ color: theme.colors.textMuted, fontSize: 15, fontVariant: ['tabular-nums'] }}>
+          {formatClock(trip.startedAt, lang)} – {formatClock(trip.endedAt, lang)} · {formatDuration(trip.durationS)}
+          {trip.source === 'simulation' ? ` · ${t('trips.simulation')}` : trip.source === 'manual' ? ` · ${t('trips.manual')}` : ''}
+        </Text>
+      </View>
 
-      <View style={styles.grid}>
-        {stats.map((s) => (
-          <Card key={s.key} style={styles.tile}>
-            <Label>{t(`trip.${s.key}`)}</Label>
-            <Text style={{ color: theme.colors.text, fontSize: theme.fontSize.title, fontWeight: '900', marginTop: 4 }}>{s.value}</Text>
-          </Card>
-        ))}
+      {points.length > 0 ? <RouteMap points={points} /> : <Body muted>{t('trip.noRoute')}</Body>}
+
+      <View style={[styles.stats, { borderColor: theme.colors.border }]}>
+        <Stat label={t('trip.avgSpeed')} value={formatSpeed(trip.avgSpeedKmh, unit)} />
+        <View style={[styles.divider, { backgroundColor: theme.colors.border }]} />
+        <Stat label={t('trip.maxSpeed')} value={formatSpeed(trip.maxSpeedKmh, unit)} />
       </View>
 
       {points.length > 1 ? (
-        <Card>
-          <Label>{t('trip.speedChart')}</Label>
-          <View style={{ marginTop: theme.spacing.md }}>
-            <SpeedChart points={points} unit={unit} />
-          </View>
-        </Card>
+        <View style={{ gap: theme.spacing.md }}>
+          <Text style={{ color: theme.colors.text, fontSize: 15, fontWeight: '600' }}>{t('trip.speedChart')}</Text>
+          <SpeedChart points={points} unit={unit} />
+        </View>
       ) : null}
 
+      <Label style={{ textAlign: 'center' }}>{t('trip.privacy')}</Label>
+
       <Pressable onPress={() => void remove()} accessibilityRole="button" style={{ alignSelf: 'center', padding: theme.spacing.md }}>
-        <Text style={{ color: theme.colors.negative, fontWeight: '700', fontSize: theme.fontSize.body }}>{t('trip.delete')}</Text>
+        <Text style={{ color: theme.colors.negative, fontWeight: '600', fontSize: theme.fontSize.body }}>{t('trip.delete')}</Text>
       </Pressable>
     </Screen>
   );
 }
 
-function Endpoint({ color, label, time }: { color: string; label: string; time: string }) {
-  const theme = useTheme();
+function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <View style={styles.endpoint}>
-      <View style={[styles.dot, { backgroundColor: color }]} />
-      <View>
-        <Label>{label}</Label>
-        <Text style={{ color: theme.colors.text, fontSize: theme.fontSize.title, fontWeight: '800' }}>{time}</Text>
-      </View>
+    <View style={{ flex: 1 }}>
+      <Num size={22}>{value}</Num>
+      <Label style={{ marginTop: 2 }}>{label}</Label>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  times: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  endpoint: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  dash: { flex: 1, borderTopWidth: 2, borderStyle: 'dashed', marginTop: 12 },
-  dot: { width: 12, height: 12, borderRadius: 6 },
-  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
-  tile: { flexBasis: '47%', flexGrow: 1 },
+  hero: { flexDirection: 'row', alignItems: 'baseline' },
+  stats: { flexDirection: 'row', borderTopWidth: StyleSheet.hairlineWidth, borderBottomWidth: StyleSheet.hairlineWidth, paddingVertical: 14 },
+  divider: { width: StyleSheet.hairlineWidth, marginHorizontal: 16 },
 });

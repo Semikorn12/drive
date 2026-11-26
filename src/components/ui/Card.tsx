@@ -1,30 +1,28 @@
 import type { ReactNode } from 'react';
-import { StyleSheet, View, type ViewStyle } from 'react-native';
+import { View, type ViewStyle } from 'react-native';
 
 import { useTheme } from '../../theme';
-import { DecoCurves } from './DecoCurves';
 
 interface Props {
   children: ReactNode;
-  /** Pass an id to show the decorative purple curves. */
+  /** Kept for compatibility; cards no longer draw decorative curves. */
   decoId?: string;
   style?: ViewStyle;
+  /** No inner padding (for lists with their own row padding). */
+  flush?: boolean;
 }
 
-export function Card({ children, decoId, style }: Props) {
+/** Plain surface block. No border, no ornaments – content carries the design. */
+export function Card({ children, style, flush }: Props) {
   const t = useTheme();
   return (
     <View
       style={[
-        styles.card,
-        { backgroundColor: t.colors.surface, borderColor: t.colors.border, borderRadius: t.radius.lg, padding: t.spacing.lg },
+        { backgroundColor: t.colors.surface, borderRadius: t.radius.lg, padding: flush ? 0 : t.spacing.lg, overflow: 'hidden' },
         style,
       ]}
     >
-      {decoId ? <DecoCurves id={decoId} /> : null}
       {children}
     </View>
   );
 }
-
-const styles = StyleSheet.create({ card: { overflow: 'hidden', borderWidth: StyleSheet.hairlineWidth } });

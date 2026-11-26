@@ -1,63 +1,48 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import Svg, { Path } from 'react-native-svg';
 
 import type { Trip } from '../domain/trip';
 import { useSettings } from '../state/settingsStore';
 import { useTheme } from '../theme';
 import { formatClock, formatDistance, formatDuration, formatSpeed } from '../utils/format';
 
-/** One row in the trip list: time span, distance, duration and average speed. */
-export function TripListItem({ trip, onPress }: { trip: Trip; onPress: () => void }) {
+/** One row in a grouped trip list. `divider` draws the hairline above it. */
+export function TripListItem({ trip, onPress, divider }: { trip: Trip; onPress: () => void; divider?: boolean }) {
   const { t, i18n } = useTranslation();
   const theme = useTheme();
   const unit = useSettings((s) => s.speedUnit);
   const lang = i18n.language;
-  const badge = trip.source === 'simulation' ? t('trips.simulation') : trip.source === 'manual' ? t('trips.manual') : null;
+  const tag = trip.source === 'simulation' ? t('trips.simulation') : trip.source === 'manual' ? t('trips.manual') : null;
 
   return (
     <Pressable
       onPress={onPress}
       accessibilityRole="button"
-      style={({ pressed }) => [
-        styles.row,
-        {
-          backgroundColor: pressed ? theme.colors.surfaceElevated : theme.colors.surface,
-          borderColor: theme.colors.border,
-          borderRadius: theme.radius.md,
-          padding: theme.spacing.lg,
-        },
-      ]}
+      style={({ pressed }) => [styles.row, { backgroundColor: pressed ? theme.colors.surfaceElevated : 'transparent' }]}
     >
-      <View style={{ flex: 1, gap: 4 }}>
-        <View style={styles.line}>
-          <Text style={{ color: theme.colors.text, fontSize: theme.fontSize.body, fontWeight: '700' }}>
-            {formatClock(trip.startedAt, lang)} – {formatClock(trip.endedAt, lang)}
-          </Text>
-          {badge ? (
-            <Text
-              style={[
-                styles.badge,
-                { color: theme.colors.accent, borderColor: theme.colors.accent, fontSize: theme.fontSize.caption },
-              ]}
-            >
-              {badge}
-            </Text>
-          ) : null}
-        </View>
-        <Text style={{ color: theme.colors.textMuted, fontSize: theme.fontSize.small }}>
+      {divider ? <View style={[styles.divider, { backgroundColor: theme.colors.border, left: theme.spacing.lg }]} /> : null}
+      <View style={{ flex: 1, gap: 3 }}>
+        <Text style={{ color: theme.colors.text, fontSize: 16, fontWeight: '600', fontVariant: ['tabular-nums'] }}>
+          {formatClock(trip.startedAt, lang)}
+          <Text style={{ color: theme.colors.textMuted, fontWeight: '400' }}> – {formatClock(trip.endedAt, lang)}</Text>
+        </Text>
+        <Text style={{ color: theme.colors.textMuted, fontSize: 13 }}>
           {formatDuration(trip.durationS)} · Ø {formatSpeed(trip.avgSpeedKmh, unit)}
+          {tag ? ` · ${tag}` : ''}
         </Text>
       </View>
-      <Text style={{ color: theme.colors.accent, fontSize: theme.fontSize.title, fontWeight: '900' }}>
+      <Text style={{ color: theme.colors.text, fontSize: 17, fontWeight: '600', fontVariant: ['tabular-nums'] }}>
         {formatDistance(trip.distanceM, unit, lang)}
       </Text>
-      <Text style={{ color: theme.colors.textMuted, fontSize: theme.fontSize.title, marginLeft: 4 }}>›</Text>
+      <Svg width={8} height={14} viewBox="0 0 8 14" style={{ marginLeft: 10 }}>
+        <Path d="M1.5 1.5 L6.5 7 L1.5 12.5" stroke={theme.colors.textMuted} strokeWidth={1.8} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      </Svg>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  row: { flexDirection: 'row', alignItems: 'center', borderWidth: StyleSheet.hairlineWidth, gap: 8 },
-  line: { flexDirection: 'row', alignItems: 'center', gap: 8, flexWrap: 'wrap' },
-  badge: { borderWidth: 1, borderRadius: 999, paddingHorizontal: 6, paddingVertical: 1, fontWeight: '700', overflow: 'hidden' },
+  row: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingVertical: 14, minHeight: 64 },
+  divider: { position: 'absolute', top: 0, right: 0, height: StyleSheet.hairlineWidth },
 });

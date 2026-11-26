@@ -8,7 +8,7 @@ export default function CompareScreen() {
   const { t } = useTranslation();
   return (
     <Screen title={t('compare.title')}>
-      <Card decoId="compare">
+      <Card>
         <Body muted>{t('compare.text')}</Body>
       </Card>
     </Screen>

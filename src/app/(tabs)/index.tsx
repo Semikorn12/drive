@@ -1,48 +1,105 @@
+import { useFocusEffect } from 'expo-router';
+import { useCallback, useEffect, useState } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { TrackingCard } from '../../components/TrackingCard';
 import { WebTrackingCard } from '../../components/WebTrackingCard';
-import { Card } from '../../components/ui/Card';
 import { Screen } from '../../components/ui/Screen';
-import { Body, Label, Title } from '../../components/ui/Typography';
+import { Body, Label, Num } from '../../components/ui/Typography';
+import { WeekBars } from '../../components/week/WeekBars';
+import { tripRepository } from '../../data/tripRepository';
+import { kmToMiles } from '../../domain/detection/geo';
+import { weekSummary, type WeekSummary } from '../../domain/stats/week';
+import { useLive } from '../../services/tracking/liveStore';
+import { useSettings } from '../../state/settingsStore';
 import { useTheme } from '../../theme';
+import { formatDuration } from '../../utils/format';
 
-/** Week overview – real numbers arrive in phase 4. */
+const STREAK_LOOKBACK_MS = 400 * 24 * 3600 * 1000;
+
+/** This week at a glance: distance, a Mon–Sun strip, trips / time / streak, and the tracking control. */
 export default function WeekScreen() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const theme = useTheme();
-  const stats = [
-    { key: 'distance', value: '0', unit: 'km' },
-    { key: 'trips', value: '0', unit: '' },
-    { key: 'duration', value: '0:00', unit: 'h' },
-    { key: 'streak', value: '0', unit: '' },
-  ];
+  const unit = useSettings((s) => s.speedUnit);
+  const phase = useLive((s) => s.phase);
+  const [week, setWeek] = useState<WeekSummary>(() => weekSummary([]));
+
+  const load = useCallback(async () => {
+    const trips = await tripRepository.listTrips({ since: Date.now() - STREAK_LOOKBACK_MS, limit: 5000 });
+    setWeek(weekSummary(trips));
+  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      void load();
+    }, [load]),
+  );
+  // A trip just ended → refresh the numbers.
+  useEffect(
+    () =>
+      useLive.subscribe((s, prev) => {
+        if (prev.phase !== 'idle' && s.phase === 'idle') void load();
+      }),
+    [load],
+  );
+
+  const km = week.distanceM / 1000;
+  const value = unit === 'mph' ? kmToMiles(km) : km;
+  const lang = i18n.language;
+  const tracking = Platform.OS === 'web' ? <WebTrackingCard /> : <TrackingCard />;
+  const driving = phase === 'driving';
+
+  const range = `${new Date(week.days[0].day).toLocaleDateString(lang, { day: 'numeric', month: 'short' })} – ${new Date(
+    week.days[6].day,
+  ).toLocaleDateString(lang, { day: 'numeric', month: 'short' })}`;
+
   return (
     <Screen title={t('week.title')}>
-      {Platform.OS === 'web' ? <WebTrackingCard /> : <TrackingCard />}
-      <View style={styles.grid}>
-        {stats.map((s) => (
-          <Card key={s.key} style={styles.tile}>
-            <Label>{t(`week.${s.key}`)}</Label>
-            <Text style={{ color: theme.colors.text, fontSize: theme.fontSize.display, fontWeight: '900', marginTop: 4 }}>
-              {s.value}
-              <Text style={{ color: theme.colors.accent, fontSize: theme.fontSize.body, fontWeight: '700' }}> {s.unit}</Text>
+      {driving ? tracking : null}
+
+      <View style={{ gap: theme.spacing.xl }}>
+        <View>
+          <Label>{range}</Label>
+          <View style={styles.hero}>
+            <Num size={64}>{value.toLocaleString(lang, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}</Num>
+            <Text style={{ color: theme.colors.textMuted, fontSize: theme.fontSize.title, fontWeight: '600', marginLeft: 6 }}>
+              {unit === 'mph' ? 'mi' : 'km'}
             </Text>
-          </Card>
-        ))}
+          </View>
+        </View>
+
+        <WeekBars days={week.days} today={week.today} locale={lang} />
+
+        <View style={[styles.stats, { borderColor: theme.colors.border }]}>
+          <Stat value={String(week.trips)} label={t('week.trips')} />
+          <View style={[styles.divider, { backgroundColor: theme.colors.border }]} />
+          <Stat value={week.durationS > 0 ? formatDuration(week.durationS) : '0 min'} label={t('week.duration')} />
+          <View style={[styles.divider, { backgroundColor: theme.colors.border }]} />
+          <Stat value={t('week.days', { count: week.streakDays })} label={t('week.streak')} />
+        </View>
+
+        {week.trips === 0 ? <Body muted>{t('week.emptyText')}</Body> : null}
       </View>
-      <Card>
-        <Title style={{ fontSize: theme.fontSize.title }}>{t('week.emptyTitle')}</Title>
-        <Body muted style={{ marginTop: 6 }}>
-          {t('week.emptyText')}
-        </Body>
-      </Card>
+
+      {driving ? null : tracking}
     </Screen>
   );
 }
 
+function Stat({ value, label }: { value: string; label: string }) {
+  return (
+    <View style={styles.stat}>
+      <Num size={20}>{value}</Num>
+      <Label style={{ marginTop: 2 }}>{label}</Label>
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
-  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
-  tile: { flexBasis: '47%', flexGrow: 1 },
+  hero: { flexDirection: 'row', alignItems: 'baseline', marginTop: 2 },
+  stats: { flexDirection: 'row', borderTopWidth: StyleSheet.hairlineWidth, borderBottomWidth: StyleSheet.hairlineWidth, paddingVertical: 14 },
+  stat: { flex: 1, paddingHorizontal: 2 },
+  divider: { width: StyleSheet.hairlineWidth, marginHorizontal: 12 },
 });

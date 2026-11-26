@@ -5,7 +5,7 @@ export type TabIconName = 'week' | 'trips' | 'compare' | 'achievements' | 'setti
 
 /** Simple stroke icons (own SVGs, no icon-font dependency). */
 export function TabIcon({ name, color, size = 24 }: { name: TabIconName; color: ColorValue; size?: number }) {
-  const common = { stroke: color, strokeWidth: 2, fill: 'none', strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
+  const common = { stroke: color, strokeWidth: 1.75, fill: 'none', strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24">
       {name === 'week' && (

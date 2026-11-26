@@ -88,7 +88,9 @@
     "duration": "Driving time",
     "streak": "Streak",
     "emptyTitle": "No trips yet",
-    "emptyText": "As soon as you drive, Dr!ve records your trip automatically."
+    "emptyText": "No trips this week yet. As soon as you drive, Dr!ve records the trip automatically.",
+    "days_one": "{{count}} day",
+    "days_other": "{{count}} days"
   },
   "trips": {
     "title": "Trips",
@@ -215,12 +217,12 @@
       "candidate": "Movement detected – checking whether you're driving …",
       "driving": "Recording trip"
     },
-    "trips": "Saved trips: {{count}}",
-    "privateShort": "Trips stay on this phone only",
-    "limitShort": "Keep this page open, the screen stays on",
     "more": "More info",
     "less": "Less",
-    "textShort": "Dr!ve needs your location to detect trips."
+    "textShort": "Dr!ve needs your location to detect trips.",
+    "heading": "Automatic detection",
+    "footer": "Trips stay on this phone only. Detection runs while this page is open.",
+    "runningTitle": "Detection is on"
   },
   "trip": {
     "title": "Trip",
