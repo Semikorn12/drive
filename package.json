@@ -56,7 +56,8 @@
     "lint": "expo lint",
     "icons": "node scripts/generate-icons.ts",
     "build:dev:ios": "eas build --profile development --platform ios",
-    "build:preview:ios": "eas build --profile preview --platform ios"
+    "build:preview:ios": "eas build --profile preview --platform ios",
+    "build:web": "node scripts/build-web.mjs"
   },
   "private": true,
   "jest": {

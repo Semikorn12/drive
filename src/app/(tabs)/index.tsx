@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { TrackingCard } from '../../components/TrackingCard';
@@ -19,7 +19,16 @@ export default function WeekScreen() {
   ];
   return (
     <Screen title={t('week.title')}>
-      <TrackingCard />
+      {Platform.OS === 'web' ? (
+        <Card decoId="web">
+          <Title style={{ fontSize: theme.fontSize.title }}>{t('webPreview.title')}</Title>
+          <Body muted style={{ marginTop: 6 }}>
+            {t('webPreview.text')}
+          </Body>
+        </Card>
+      ) : (
+        <TrackingCard />
+      )}
       <View style={styles.grid}>
         {stats.map((s) => (
           <Card key={s.key} decoId={`week-${s.key}`} style={styles.tile}>

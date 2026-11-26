@@ -179,5 +179,9 @@
     "empty": "Noch keine Einträge.",
     "trips": "Gespeicherte Fahrten",
     "battery": "Akku"
+  },
+  "webPreview": {
+    "title": "Web-Vorschau",
+    "text": "Das ist die Vorschau im Browser. Du siehst das Design und kannst in der Diagnose (Einstellungen → 7× auf die Version tippen) Beispielfahrten simulieren. Echte Fahrten erkennt nur die iPhone-App – ein Browser darf den Standort nicht im Hintergrund nutzen. Daten bleiben nur bis zum Neuladen der Seite."
   }
 }

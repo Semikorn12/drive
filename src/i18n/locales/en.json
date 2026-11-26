@@ -179,5 +179,9 @@
     "empty": "No entries yet.",
     "trips": "Saved trips",
     "battery": "Battery"
+  },
+  "webPreview": {
+    "title": "Web preview",
+    "text": "This is the browser preview. You can see the design and simulate sample trips in Diagnostics (Settings → tap the version 7×). Only the iPhone app detects real trips – a browser may not use your location in the background. Data is kept only until you reload the page."
   }
 }

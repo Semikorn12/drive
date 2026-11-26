@@ -83,5 +83,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ],
   experiments: {
     typedRoutes: true,
+    // Only for the web preview on GitHub Pages (served under /drive/). Empty for the iPhone app.
+    ...(process.env.EXPO_BASE_URL ? { baseUrl: process.env.EXPO_BASE_URL } : {}),
   },
 });

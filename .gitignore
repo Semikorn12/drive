@@ -42,3 +42,4 @@ yarn-error.*
 
 # Export-Archive
 *.zip
+dist-web/
