@@ -59,6 +59,13 @@
         "subtitle": "Dr!ve sends your weekly recap on Sundays at 6 pm and tells you when you unlock a badge or a friend overtakes you.",
         "b1": "Dr!ve never sends notifications while you drive.",
         "b2": "No advertising notifications."
+      },
+      "locationWeb": {
+        "title": "Location",
+        "subtitle": "To detect your trips, this page needs your location. Your browser will ask in a moment.",
+        "b1": "Everything stays on your phone: location, trips and routes are stored only in this browser and never sent anywhere.",
+        "b2": "In the browser, detection only runs while the page is open and the screen is on. Fully automatic background detection needs the iPhone app.",
+        "limited": "Allowed ✓"
       }
     }
   },
@@ -180,8 +187,27 @@
     "trips": "Saved trips",
     "battery": "Battery"
   },
-  "webPreview": {
-    "title": "Web preview",
-    "text": "This is the browser preview. You can see the design and simulate sample trips in Diagnostics (Settings → tap the version 7×). Only the iPhone app detects real trips – a browser may not use your location in the background. Data is kept only until you reload the page."
+  "web": {
+    "title": "Detect trips in the browser",
+    "text": "Tap “Allow location”. Your browser will ask whether Dr!ve may use your location.",
+    "private": "Everything stays on your phone: location, trips and routes are stored only here in your browser and are never sent anywhere.",
+    "limit": "Important: in the browser this only works while this page is open and the screen is on (e.g. phone in a car mount). Dr!ve keeps the screen awake for this. If the phone locks, detection pauses.",
+    "start": "Allow location",
+    "stop": "Stop detection",
+    "status": {
+      "off": "Detection off",
+      "starting": "Waiting for location …",
+      "on": "Detection running – just drive",
+      "denied": "Location not allowed. Allow it in iPhone Settings → Safari → Location.",
+      "unsupported": "This browser cannot determine your location.",
+      "error": "No GPS signal. Try again outdoors."
+    },
+    "screenOn": "Screen stays on",
+    "phase": {
+      "idle": "Waiting for movement",
+      "candidate": "Movement detected – checking whether you're driving …",
+      "driving": "Recording trip"
+    },
+    "trips": "Saved trips: {{count}}"
   }
 }

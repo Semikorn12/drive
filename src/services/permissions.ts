@@ -39,6 +39,7 @@ export async function readPermissions(): Promise<PermissionsSnapshot> {
 export async function requestLocation(): Promise<PermState> {
   const fg = await Location.requestForegroundPermissionsAsync();
   if (fg.status !== 'granted') return norm(fg.status);
+  if (Platform.OS === 'web') return 'granted'; // browsers have no "Always" level
   const bg = await Location.requestBackgroundPermissionsAsync();
   return bg.status === 'granted' ? 'granted' : 'limited';
 }

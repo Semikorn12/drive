@@ -6,6 +6,7 @@ import { dbLogger } from '../../data/logRepository';
 import { tripRepository } from '../../data/tripRepository';
 import {
   beginCandidate,
+  effectiveSpeed,
   forceStart,
   forceStop,
   handleTime,
@@ -167,7 +168,9 @@ function maybeRefreshMotion() {
 
 function updateLiveSpeed(sample: LocationSample, prev: LocationSample | null, driving: boolean) {
   const live = useLive.getState();
-  const speed = sample.speed != null ? msToKmh(sample.speed) : null;
+  // Browsers often report no speed → derive it from the previous position.
+  const v = effectiveSpeed(sample, prev);
+  const speed = v != null ? msToKmh(v) : null;
   let dist = live.tripDistanceM;
   if (driving && prev && (sample.speed == null || sample.speed > 0.6)) {
     dist += haversineM(prev.lat, prev.lon, sample.lat, sample.lon);

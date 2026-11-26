@@ -2,6 +2,7 @@ import { Platform, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { TrackingCard } from '../../components/TrackingCard';
+import { WebTrackingCard } from '../../components/WebTrackingCard';
 import { Card } from '../../components/ui/Card';
 import { Screen } from '../../components/ui/Screen';
 import { Body, Label, Title } from '../../components/ui/Typography';
@@ -19,16 +20,7 @@ export default function WeekScreen() {
   ];
   return (
     <Screen title={t('week.title')}>
-      {Platform.OS === 'web' ? (
-        <Card decoId="web">
-          <Title style={{ fontSize: theme.fontSize.title }}>{t('webPreview.title')}</Title>
-          <Body muted style={{ marginTop: 6 }}>
-            {t('webPreview.text')}
-          </Body>
-        </Card>
-      ) : (
-        <TrackingCard />
-      )}
+      {Platform.OS === 'web' ? <WebTrackingCard /> : <TrackingCard />}
       <View style={styles.grid}>
         {stats.map((s) => (
           <Card key={s.key} decoId={`week-${s.key}`} style={styles.tile}>

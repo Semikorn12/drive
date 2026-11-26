@@ -1,4 +1,4 @@
-import { memory } from './memoryBackend';
+import { memory, scheduleSave } from './memoryBackend';
 
 export async function kvGet<T>(key: string): Promise<T | null> {
   const v = memory.kv.get(key);
@@ -7,4 +7,5 @@ export async function kvGet<T>(key: string): Promise<T | null> {
 
 export async function kvSet(key: string, value: unknown) {
   memory.kv.set(key, JSON.stringify(value));
+  scheduleSave();
 }

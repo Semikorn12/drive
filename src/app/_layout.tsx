@@ -10,6 +10,7 @@ import { View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { IntroAnimation } from '../components/brand/IntroAnimation';
+import { applyLanguage } from '../i18n';
 import { useTrackingLifecycle } from '../hooks/useTrackingLifecycle';
 import { useSettings } from '../state/settingsStore';
 import { useTheme } from '../theme';
@@ -25,6 +26,9 @@ let introPlayedThisProcess = false;
 export default function RootLayout() {
   const hydrated = useSettings((s) => s.hasHydrated);
   const onboardingDone = useSettings((s) => s.onboardingDone);
+  const language = useSettings((s) => s.language);
+  // Safety net: make sure the saved language is active before any screen renders (idempotent).
+  if (hydrated) applyLanguage(language);
   const t = useTheme();
   const [showIntro, setShowIntro] = useState(!introPlayedThisProcess);
   useTrackingLifecycle(hydrated && onboardingDone);

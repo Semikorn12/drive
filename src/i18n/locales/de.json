@@ -59,6 +59,13 @@
         "subtitle": "Dr!ve schickt dir sonntags um 18 Uhr deinen Wochenrückblick und sagt Bescheid, wenn du einen Erfolg freischaltest oder ein Freund dich überholt.",
         "b1": "Während der Fahrt schickt Dr!ve nie Mitteilungen.",
         "b2": "Keine Werbung per Mitteilung."
+      },
+      "locationWeb": {
+        "title": "Standort",
+        "subtitle": "Damit Dr!ve deine Fahrten erkennt, braucht die Seite deinen Standort. Dein Browser fragt gleich nach.",
+        "b1": "Alles bleibt auf deinem Handy: Standort, Fahrten und Routen werden nur in diesem Browser gespeichert und nirgendwohin gesendet.",
+        "b2": "Im Browser läuft die Erkennung nur, solange die Seite offen und der Bildschirm an ist. Automatisch im Hintergrund geht das nur mit der iPhone-App.",
+        "limited": "Erlaubt ✓"
       }
     }
   },
@@ -180,8 +187,27 @@
     "trips": "Gespeicherte Fahrten",
     "battery": "Akku"
   },
-  "webPreview": {
-    "title": "Web-Vorschau",
-    "text": "Das ist die Vorschau im Browser. Du siehst das Design und kannst in der Diagnose (Einstellungen → 7× auf die Version tippen) Beispielfahrten simulieren. Echte Fahrten erkennt nur die iPhone-App – ein Browser darf den Standort nicht im Hintergrund nutzen. Daten bleiben nur bis zum Neuladen der Seite."
+  "web": {
+    "title": "Fahrten im Browser erkennen",
+    "text": "Tippe auf „Standort erlauben“. Dein Browser fragt dann, ob Dr!ve deinen Standort nutzen darf.",
+    "private": "Alles bleibt auf deinem Handy: Standort, Fahrten und Routen werden nur hier im Browser gespeichert und nirgendwohin gesendet.",
+    "limit": "Wichtig: Im Browser funktioniert das nur, solange diese Seite offen und der Bildschirm an ist (z. B. Handy in der Halterung). Dr!ve hält den Bildschirm dafür wach. Wird das Handy gesperrt, pausiert die Erkennung.",
+    "start": "Standort erlauben",
+    "stop": "Erkennung stoppen",
+    "status": {
+      "off": "Erkennung aus",
+      "starting": "Warte auf Standort …",
+      "on": "Erkennung läuft – fahr einfach los",
+      "denied": "Standort nicht erlaubt. Erlaube ihn in den iPhone-Einstellungen → Safari → Standort.",
+      "unsupported": "Dieser Browser kann keinen Standort ermitteln.",
+      "error": "Kein GPS-Signal. Versuch es draußen noch einmal."
+    },
+    "screenOn": "Bildschirm bleibt an",
+    "phase": {
+      "idle": "Warte auf Bewegung",
+      "candidate": "Bewegung erkannt – prüfe, ob du fährst …",
+      "driving": "Fahrt wird aufgezeichnet"
+    },
+    "trips": "Gespeicherte Fahrten: {{count}}"
   }
 }

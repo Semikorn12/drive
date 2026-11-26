@@ -32,3 +32,5 @@ export default i18n;
 useSettings.subscribe((s, prev) => {
   if (s.language !== prev.language || (s.hasHydrated && !prev.hasHydrated)) applyLanguage(s.language);
 });
+// If the settings were already loaded before this subscription existed, apply them now.
+if (useSettings.getState().hasHydrated) applyLanguage(useSettings.getState().language);
