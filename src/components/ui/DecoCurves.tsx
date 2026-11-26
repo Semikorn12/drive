@@ -15,10 +15,11 @@ export function DecoCurves({ id, variant = 'card' }: Props) {
   const paths =
     variant === 'header'
       ? ['M-20 90 C80 20 200 140 420 30', 'M-20 120 C120 60 220 160 420 70']
-      : ['M-20 110 C90 60 180 150 420 50', 'M-20 140 C140 100 240 170 420 100'];
+      : ['M-20 40 C90 10 200 60 420 14', 'M-20 56 C140 30 240 66 420 40'];
+  const box = variant === 'header' ? StyleSheet.absoluteFill : styles.cardBand;
   return (
-    <View style={StyleSheet.absoluteFill} pointerEvents="none">
-      <Svg width="100%" height="100%" viewBox="0 0 400 160" preserveAspectRatio="none">
+    <View style={box} pointerEvents="none">
+      <Svg width="100%" height="100%" viewBox={variant === 'header' ? '0 0 400 160' : '0 0 400 64'} preserveAspectRatio="none">
         <Defs>
           <LinearGradient id={`deco-${id}`} x1="0" y1="0" x2="1" y2="0">
             <Stop offset="0" stopColor={colors.decoFrom} />
@@ -39,3 +40,6 @@ export function DecoCurves({ id, variant = 'card' }: Props) {
     </View>
   );
 }
+
+/** Cards: curves stay in a low band at the bottom edge so they never run through text. */
+const styles = StyleSheet.create({ cardBand: { position: 'absolute', left: 0, right: 0, bottom: 0, height: 44 } });

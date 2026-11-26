@@ -92,7 +92,14 @@
   },
   "trips": {
     "title": "Trips",
-    "empty": "Your trips will appear here, newest first."
+    "empty": "Your trips will appear here, newest first.",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "loadMore": "Load older trips",
+    "simulation": "Simulation",
+    "manual": "Manual",
+    "count_one": "{{count}} trip",
+    "count_other": "{{count}} trips"
   },
   "compare": {
     "title": "Compare",
@@ -208,6 +215,36 @@
       "candidate": "Movement detected – checking whether you're driving …",
       "driving": "Recording trip"
     },
-    "trips": "Saved trips: {{count}}"
+    "trips": "Saved trips: {{count}}",
+    "privateShort": "Trips stay on this phone only",
+    "limitShort": "Keep this page open, the screen stays on",
+    "more": "More info",
+    "less": "Less",
+    "textShort": "Dr!ve needs your location to detect trips."
+  },
+  "trip": {
+    "title": "Trip",
+    "notFound": "This trip no longer exists.",
+    "route": "Route",
+    "noRoute": "No GPS points are stored for this trip.",
+    "start": "Start",
+    "end": "Finish",
+    "distance": "Distance",
+    "duration": "Duration",
+    "avgSpeed": "Avg speed",
+    "maxSpeed": "Top speed",
+    "speedChart": "Speed over time",
+    "privacy": "The route is stored on this device only.",
+    "delete": "Delete trip",
+    "deleteTitle": "Delete trip?",
+    "deleteText": "The trip and its route will be deleted from this device. This cannot be undone.",
+    "deleteConfirm": "Delete",
+    "cancel": "Cancel"
+  },
+  "live": {
+    "title": "Live",
+    "duration": "Driving time",
+    "distance": "Distance",
+    "noSignal": "Waiting for GPS …"
   }
 }

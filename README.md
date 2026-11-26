@@ -12,7 +12,7 @@ Tech-Stack: Expo SDK 58 · React Native · TypeScript · expo-router · Reanimat
 |---|---|---|
 | 1 | Projekt, Struktur, Design-Tokens, Navigation, Onboarding (Sprache, Design), Startanimation, EAS | ✅ |
 | 2 | Fahrterkennung, SQLite, Simulation, Tests, Diagnose | ✅ |
-| 3 | Fahrtenliste, Fahrtdetail mit Karte + Diagramm, Live-Tacho | – |
+| 3 | Fahrtenliste, Fahrtdetail mit Streckenskizze + Tempo-Diagramm, Live-Tacho | ✅ |
 | 4 | Wochenübersicht, Erfolge, Wochenrückblick | – |
 | 5 | Supabase: Konto, Freunde, Rangliste | – |
 | 6 | Feinschliff, Texte, Icon, README | – |
@@ -222,10 +222,12 @@ src/
     _layout.tsx        Wurzel: Theme, Startanimation, Onboarding-Weiche
     onboarding/        Sprache → Design → Konto → Fertig
     (tabs)/            Woche, Fahrten, Vergleich, Erfolge, Einstellungen
+    trip/[id].tsx      Fahrtdetail: Streckenskizze, Kennzahlen, Tempo-Diagramm, Löschen
   components/
     brand/             Logo-Geometrie, statisches Logo, Startanimation
     ui/                Header, Karten, Buttons, Deko-Linien, Icons
     onboarding/        Onboarding-Layout
+    trip/              Streckenskizze (RouteMap), Tempo-Diagramm (SpeedChart), Live-Tacho (LiveGauge)
     AdBanner.tsx       Platzhalter Werbung (Feature-Flag aus)
   theme/
     tokens.ts          ⭐ Alle Farben, Abstände, Schriftgrößen
@@ -234,6 +236,7 @@ src/
   state/               Einstellungen (zustand, gespeichert in AsyncStorage)
   config/              Feature-Flags (Werbung, Abo, Fahrtenbuch … alle aus)
   domain/              Reine Fachlogik ohne Handy-Abhängigkeit (100 % unit-getestet)
+    route/             Strecke in Bildkoordinaten umrechnen, Tempo-Verlauf fürs Diagramm
     detection/         Zustandsautomat der Fahrterkennung, Statistik, Geo-Rechnung
     recording/         Ereignisse → gespeicherte Fahrten (inkl. 500-m-Regel)
     gpx/               GPX lesen/schreiben, Beispielfahrten

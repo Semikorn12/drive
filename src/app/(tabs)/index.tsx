@@ -23,11 +23,11 @@ export default function WeekScreen() {
       {Platform.OS === 'web' ? <WebTrackingCard /> : <TrackingCard />}
       <View style={styles.grid}>
         {stats.map((s) => (
-          <Card key={s.key} decoId={`week-${s.key}`} style={styles.tile}>
+          <Card key={s.key} style={styles.tile}>
             <Label>{t(`week.${s.key}`)}</Label>
             <Text style={{ color: theme.colors.text, fontSize: theme.fontSize.display, fontWeight: '900', marginTop: 4 }}>
               {s.value}
-              <Text style={{ color: theme.colors.accent, fontSize: theme.fontSize.body }}> {s.unit}</Text>
+              <Text style={{ color: theme.colors.accent, fontSize: theme.fontSize.body, fontWeight: '700' }}> {s.unit}</Text>
             </Text>
           </Card>
         ))}

@@ -92,7 +92,14 @@
   },
   "trips": {
     "title": "Fahrten",
-    "empty": "Hier erscheinen deine Fahrten, neueste zuerst."
+    "empty": "Hier erscheinen deine Fahrten, neueste zuerst.",
+    "today": "Heute",
+    "yesterday": "Gestern",
+    "loadMore": "Ältere Fahrten laden",
+    "simulation": "Simulation",
+    "manual": "Von Hand",
+    "count_one": "{{count}} Fahrt",
+    "count_other": "{{count}} Fahrten"
   },
   "compare": {
     "title": "Vergleich",
@@ -208,6 +215,36 @@
       "candidate": "Bewegung erkannt – prüfe, ob du fährst …",
       "driving": "Fahrt wird aufgezeichnet"
     },
-    "trips": "Gespeicherte Fahrten: {{count}}"
+    "trips": "Gespeicherte Fahrten: {{count}}",
+    "privateShort": "Fahrten bleiben nur auf diesem Handy",
+    "limitShort": "Seite offen lassen, Bildschirm bleibt an",
+    "more": "Mehr Infos",
+    "less": "Weniger",
+    "textShort": "Dr!ve braucht deinen Standort, um Fahrten zu erkennen."
+  },
+  "trip": {
+    "title": "Fahrt",
+    "notFound": "Diese Fahrt gibt es nicht mehr.",
+    "route": "Strecke",
+    "noRoute": "Für diese Fahrt sind keine GPS-Punkte gespeichert.",
+    "start": "Start",
+    "end": "Ziel",
+    "distance": "Strecke",
+    "duration": "Dauer",
+    "avgSpeed": "Ø Tempo",
+    "maxSpeed": "Max. Tempo",
+    "speedChart": "Tempo im Verlauf",
+    "privacy": "Die Route ist nur auf diesem Gerät gespeichert.",
+    "delete": "Fahrt löschen",
+    "deleteTitle": "Fahrt löschen?",
+    "deleteText": "Die Fahrt und ihre Route werden von diesem Gerät gelöscht. Das kann nicht rückgängig gemacht werden.",
+    "deleteConfirm": "Löschen",
+    "cancel": "Abbrechen"
+  },
+  "live": {
+    "title": "Live",
+    "duration": "Fahrzeit",
+    "distance": "Strecke",
+    "noSignal": "Warte auf GPS …"
   }
 }

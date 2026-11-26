@@ -22,6 +22,26 @@ export function formatDuration(seconds: number): string {
   return `${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')} h`;
 }
 
+/** 14:05 */
+export function formatClock(t: number | null, locale?: string): string {
+  if (t == null) return '–';
+  return new Date(t).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' });
+}
+
+/** 1234 s → "20:34", 4000 s → "1:06:40" (live stopwatch). */
+export function formatStopwatch(seconds: number): string {
+  const s = Math.max(0, Math.floor(seconds));
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const sec = String(s % 60).padStart(2, '0');
+  return h > 0 ? `${h}:${String(m).padStart(2, '0')}:${sec}` : `${m}:${sec}`;
+}
+
+/** "Montag, 23. November" */
+export function formatDay(t: number, locale?: string): string {
+  return new Date(t).toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long' });
+}
+
 export function formatTime(t: number | null, locale?: string): string {
   if (t == null) return '–';
   return new Date(t).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', second: '2-digit' });

@@ -48,6 +48,7 @@ export default function RootLayout() {
               <Stack.Screen name="diagnostics" options={{ presentation: 'card' }} />
               <Stack.Screen name="trip/start" />
               <Stack.Screen name="trip/stop" />
+              <Stack.Screen name="trip/[id]" />
             </Stack.Protected>
           </Stack>
         ) : null}

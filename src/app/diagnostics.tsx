@@ -109,7 +109,7 @@ export default function DiagnosticsScreen() {
 
   return (
     <Screen title={t('diagnostics.title')}>
-      <Pressable onPress={() => router.back()} accessibilityRole="button">
+      <Pressable onPress={() => (router.canGoBack() ? router.back() : router.replace('/settings'))} accessibilityRole="button">
         <Text style={{ color: theme.colors.accent, fontWeight: '700' }}>‹ {t('common.back')}</Text>
       </Pressable>
       <Label>{t('diagnostics.status')}</Label>

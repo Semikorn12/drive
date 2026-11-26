@@ -6,9 +6,8 @@ import { useTranslation } from 'react-i18next';
 import { readPermissions } from '../services/permissions';
 import { manualStart, manualStop } from '../services/tracking/engine';
 import { useLive } from '../services/tracking/liveStore';
-import { useSettings } from '../state/settingsStore';
 import { useTheme } from '../theme';
-import { formatDistance } from '../utils/format';
+import { LiveGauge } from './trip/LiveGauge';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
 import { Body } from './ui/Typography';
@@ -21,9 +20,7 @@ export function TrackingCard() {
   const { t } = useTranslation();
   const theme = useTheme();
   const phase = useLive((s) => s.phase);
-  const dist = useLive((s) => s.tripDistanceM);
   const sim = useLive((s) => s.simulation.running);
-  const unit = useSettings((s) => s.speedUnit);
   const [autoOn, setAutoOn] = useState<boolean | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -53,16 +50,16 @@ export function TrackingCard() {
   };
 
   return (
-    <Card decoId="tracking">
+    <Card>
       <View style={styles.row}>
         <View style={[styles.dot, { backgroundColor: dot }]} />
         <Text style={{ color: theme.colors.text, fontWeight: '700', fontSize: theme.fontSize.body, flex: 1 }}>{status}</Text>
-        {phase === 'driving' ? (
-          <Text style={{ color: theme.colors.accent, fontWeight: '900', fontSize: theme.fontSize.title }}>
-            {formatDistance(dist, unit)}
-          </Text>
-        ) : null}
       </View>
+      {phase === 'driving' ? (
+        <View style={{ marginTop: theme.spacing.md }}>
+          <LiveGauge />
+        </View>
+      ) : null}
       {sim ? <Body muted style={{ marginTop: 4 }}>{t('tracking.simulationBadge')}</Body> : null}
       {autoOn === false && phase === 'idle' ? (
         <Body muted style={{ marginTop: 6 }}>
